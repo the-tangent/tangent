@@ -6,9 +6,15 @@ gem 'sinatra'
 gem 'puma'
 
 gem 'sequel'
-gem 'pg'
+gem 'pg', "0.15.1"
 
 group :development do
   gem 'sqlite3'
   gem 'foreman'
+end
+
+group :test do
+  gem 'capybara'
+  gem 'rspec'
+  gem 'emoji-rspec'
 end
