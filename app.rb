@@ -1,5 +1,6 @@
 require "sinatra"
 require "sequel"
+require "redcarpet"
 
 require "./lib/all"
 
@@ -47,6 +48,17 @@ end
 get '/admin/articles/new' do
   protected! do
     erb :admin_articles_new, :layout => :admin_layout
+  end
+end
+
+get '/admin/articles/:id' do
+  protected! do
+    article = ArticleService.new(DB).fetch(params[:id])
+    
+    markdown_renderer = ::Redcarpet::Markdown.new(Redcarpet::Render::HTML)
+    content = markdown_renderer.render(article[:content])
+    
+    erb :admin_articles_show, :locals => { :article => article, :content => content }, :layout => :admin_layout
   end
 end
 

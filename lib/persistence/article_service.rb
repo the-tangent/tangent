@@ -3,6 +3,10 @@ class ArticleService
     @db = db
   end
   
+  def fetch(id)
+    @db[:articles].where(:id => id).first
+  end
+  
   def fetch_all
     @db[:articles].all
   end
