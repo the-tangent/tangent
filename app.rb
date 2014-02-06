@@ -33,20 +33,20 @@ end
 
 get '/admin' do
   protected! do
-    erb :admin
+    erb :admin, :layout => :admin_layout
   end
 end
 
 get '/admin/articles' do
   protected! do
     articles = ArticleService.new(DB).fetch_all
-    erb :admin_articles, :locals => { :articles => articles }
+    erb :admin_articles, :locals => { :articles => articles }, :layout => :admin_layout
   end
 end
 
 get '/admin/articles/new' do
   protected! do
-    erb :admin_articles_new
+    erb :admin_articles_new, :layout => :admin_layout
   end
 end
 

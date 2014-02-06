@@ -14,7 +14,7 @@ describe "An admin managing articles" do
     end
     
     it "can create an article" do
-      click_on "View Articles"
+      click_on "Articles"
       click_on "New Article"
       
       fill_in "Author", :with => "Roger Ebert"
