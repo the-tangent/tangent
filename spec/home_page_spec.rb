@@ -1,9 +1,4 @@
-ENV["RACK_ENV"] = "test"
-
-require_relative '../app'
-require 'capybara'
-require 'capybara/dsl'
-require 'rspec'
+require "spec_helper"
 
 describe "Homepage" do
   include Capybara::DSL
