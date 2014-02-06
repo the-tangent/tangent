@@ -1,7 +1,7 @@
 require 'sinatra'
 require 'sequel'
 
-Sequel.connect(ENV["DATABASE_URL"] || "sqlite://tangent.db")
+DB = Sequel.connect(ENV["DATABASE_URL"] || "sqlite://tangent.db")
 
 helpers do
   def protected!(&blk)
@@ -37,12 +37,27 @@ end
 
 get '/admin/articles' do
   protected! do
-    erb :admin_articles
+    articles = DB[:articles].all
+    erb :admin_articles, :locals => { :articles => articles }
   end
 end
 
 get '/admin/articles/new' do
   protected! do
     erb :admin_articles_new
+  end
+end
+
+post "/admin/articles" do
+  protected! do
+    article_params = params[:article]
+    
+    DB[:articles].insert(
+      :author => article_params[:author],
+      :title => article_params[:title],
+      :content => article_params[:content]
+    )
+    
+    redirect to("/admin/articles")
   end
 end

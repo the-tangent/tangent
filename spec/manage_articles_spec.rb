@@ -24,7 +24,6 @@ describe "An admin managing articles" do
       click_on "Save"
       expect(page).to have_content("Roger Ebert")
       expect(page).to have_content("Computer Chess")
-      expect(page).to have_content("Here's a movie by nerds, for nerds, and about nerds.")
     end
   end
 end

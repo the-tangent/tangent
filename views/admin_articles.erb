@@ -1,1 +1,8 @@
-<a href="/admin/articles/new">New Article</a>
+<h3>Articles</h3>
+<ul>
+  <% articles.each do |article| %>
+    <li><%= article[:author] %> - <%= article[:title] %></li>
+  <% end %>
+  <li><a href="/admin/articles/new">New Article</a></li>
+</ul>
+
