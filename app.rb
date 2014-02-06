@@ -1,6 +1,24 @@
 require 'sinatra'
 require 'sequel'
 
+class ArticleService
+  def initialize(db)
+    @db = db
+  end
+  
+  def fetch_all
+    @db[:articles].all
+  end
+  
+  def create(author, title, content)
+    @db[:articles].insert(
+      :author => author,
+      :title => title,
+      :content => content
+    )
+  end
+end
+
 DB = Sequel.connect(ENV["DATABASE_URL"] || "sqlite://tangent.db")
 
 helpers do
@@ -37,7 +55,7 @@ end
 
 get '/admin/articles' do
   protected! do
-    articles = DB[:articles].all
+    articles = ArticleService.new(DB).fetch_all
     erb :admin_articles, :locals => { :articles => articles }
   end
 end
@@ -51,11 +69,10 @@ end
 post "/admin/articles" do
   protected! do
     article_params = params[:article]
-    
-    DB[:articles].insert(
-      :author => article_params[:author],
-      :title => article_params[:title],
-      :content => article_params[:content]
+    ArticleService.new(DB).create(
+      article_params[:author],
+      article_params[:title],
+      article_params[:content] 
     )
     
     redirect to("/admin/articles")
