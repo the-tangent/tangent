@@ -19,8 +19,6 @@ class ArticleService
   end
 end
 
-DB = Sequel.connect(ENV["DATABASE_URL"] || "sqlite://tangent.db")
-
 helpers do
   def protected!(&blk)
     if authorized?
@@ -42,6 +40,8 @@ helpers do
     @auth.provided? and @auth.basic? and @auth.credentials and @auth.credentials == admin_credentials
   end
 end
+
+DB = Sequel.connect(ENV["DATABASE_URL"] || "sqlite://tangent.db")
 
 get '/' do
   "We're not going to pay you..."
