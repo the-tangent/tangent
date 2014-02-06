@@ -28,7 +28,7 @@ end
 DB = Sequel.connect(ENV["DATABASE_URL"] || "sqlite://tangent.db")
 
 get '/' do
-  "We're not going to pay you..."
+  erb :home
 end
 
 get '/admin' do
