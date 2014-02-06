@@ -31,6 +31,18 @@ end
 
 get '/admin' do
   protected! do
-    "Hi Lisa :)"
+    erb :admin
+  end
+end
+
+get '/admin/articles' do
+  protected! do
+    erb :admin_articles
+  end
+end
+
+get '/admin/articles/new' do
+  protected! do
+    erb :admin_articles_new
   end
 end
