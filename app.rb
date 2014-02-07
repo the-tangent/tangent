@@ -15,14 +15,14 @@ helpers do
   end
 
   def authorized?
-    admin_credentials = if ENV["RACK_ENV"] == "production"
+    editor_credentials = if ENV["RACK_ENV"] == "production"
       [ENV["ADMIN_USERNAME"], ENV["ADMIN_PASSWORD"]]
     else
-      ["admin", "admin"]
+      ["editor", "editor"]
     end      
     
     @auth ||=  Rack::Auth::Basic::Request.new(request.env)
-    @auth.provided? and @auth.basic? and @auth.credentials and @auth.credentials == admin_credentials
+    @auth.provided? and @auth.basic? and @auth.credentials and @auth.credentials == editor_credentials
   end
 end
 
@@ -32,37 +32,37 @@ get '/' do
   erb :home
 end
 
-get '/admin' do
+get '/editor' do
   protected! do
-    erb :admin, :layout => :admin_layout
+    erb :editor, :layout => :editor_layout
   end
 end
 
-get '/admin/articles' do
+get '/editor/articles' do
   protected! do
     articles = ArticleService.new(DB).fetch_all
-    erb :admin_articles, :locals => { :articles => articles }, :layout => :admin_layout
+    erb :editor_articles, :locals => { :articles => articles }, :layout => :editor_layout
   end
 end
 
-get '/admin/articles/new' do
+get '/editor/articles/new' do
   protected! do
-    erb :admin_articles_new, :layout => :admin_layout
+    erb :editor_articles_new, :layout => :editor_layout
   end
 end
 
-get '/admin/articles/:id' do
+get '/editor/articles/:id' do
   protected! do
     article = ArticleService.new(DB).fetch(params[:id])
     
     markdown_renderer = ::Redcarpet::Markdown.new(Redcarpet::Render::HTML)
     content = markdown_renderer.render(article[:content])
     
-    erb :admin_articles_show, :locals => { :article => article, :content => content }, :layout => :admin_layout
+    erb :editor_articles_show, :locals => { :article => article, :content => content }, :layout => :editor_layout
   end
 end
 
-post "/admin/articles" do
+post "/editor/articles" do
   protected! do
     article_params = params[:article]
     ArticleService.new(DB).create(
@@ -71,6 +71,6 @@ post "/admin/articles" do
       article_params[:content] 
     )
     
-    redirect to("/admin/articles")
+    redirect to("/editor/articles")
   end
 end

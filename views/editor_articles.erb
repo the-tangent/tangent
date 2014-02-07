@@ -5,11 +5,11 @@
 <!-- <ul class="list-group"> -->
   <% articles.each do |article| %>
     <!-- <li class="list-group-item"> -->
-      <h4><a href="/admin/articles/<%= article[:id] %>"><%= article[:title] %></a> <small><%= article[:author] %></small></h4>
+      <h4><a href="/editor/articles/<%= article[:id] %>"><%= article[:title] %></a> <small><%= article[:author] %></small></h4>
     <!-- </li> -->
   <% end %>
 <!-- </ul> -->
 
 <br>
 <br>
-<a href="/admin/articles/new" class="btn btn-default">New Article</a></li>
+<a href="/editor/articles/new" class="btn btn-default">New Article</a></li>

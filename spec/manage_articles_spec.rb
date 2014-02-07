@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "An admin managing articles" do
+describe "An editor managing articles" do
   include Capybara::DSL
 
   before do
@@ -9,8 +9,8 @@ describe "An admin managing articles" do
   
   describe "on the article list page" do
     before do
-      page.driver.browser.basic_authorize("admin", "admin")
-      visit "/admin" 
+      page.driver.browser.basic_authorize("editor", "editor")
+      visit "/editor" 
     end
     
     it "can create an article" do
