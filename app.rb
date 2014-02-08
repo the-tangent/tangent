@@ -57,7 +57,8 @@ end
 
 get '/editor/articles/new' do
   protected! do
-    erb :editor_articles_new, :layout => :editor_layout
+    categories = DB[:categories].all
+    erb :editor_articles_new, :locals => { :categories => categories }, :layout => :editor_layout
   end
 end
 
@@ -85,7 +86,8 @@ post "/editor/articles" do
     ArticleService.new(DB).create(
       article_params[:author],
       article_params[:title],
-      article_params[:content] 
+      article_params[:category],
+      article_params[:content]
     )
 
     redirect to("/editor/articles")
@@ -128,7 +130,8 @@ end
 get "/editor/categories/:id" do
   protected! do
     category = DB[:categories].where(:id => params[:id]).first
-    erb :editor_categories_show, :locals => { :category => category }, :layout => :editor_layout
+    articles = ArticleService.new(DB).fetch_all_from_category(category[:id])
+    erb :editor_categories_show, :locals => { :category => category, :articles => articles }, :layout => :editor_layout
   end
 end
 
