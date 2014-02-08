@@ -2,13 +2,12 @@
   <h3>Articles</h3>
 </div>
 
-<!-- <ul class="list-group"> -->
-  <% articles.each do |article| %>
-    <!-- <li class="list-group-item"> -->
-      <h4><a href="/editor/articles/<%= article[:id] %>"><%= article[:title] %></a> <small><%= article[:author] %></small></h4>
-    <!-- </li> -->
-  <% end %>
-<!-- </ul> -->
+<% articles.each do |article| %>
+    <h4>
+      <a href="/editor/articles/<%= article[:id] %>">
+        <%= article[:title] %>
+      </a> <small><%= article[:author] %></small></h4>
+<% end %>
 
 <br>
 <br>

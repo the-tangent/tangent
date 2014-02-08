@@ -42,5 +42,26 @@ describe "An editor managing articles" do
         expect(page.html).to include("<p>And, about nerds.</p>")
       end
     end
+    
+    describe "clicking edit for an article" do
+      it "lets the editor edit the article" do
+        click_on "Articles"
+        click_on "New Article"
+      
+        fill_in "Author", :with => "Roger Ebert"
+        fill_in "Title", :with => "Computer Chess"
+        fill_in "Content", :with => "Here is a movie by nerds, for *nerds*.\n\nAnd, about nerds."
+      
+        click_on "Save"
+        click_on "Computer Chess"      
+        click_on "Edit"
+        
+        fill_in "Author", :with => "David Chen"
+        click_on "Save"
+        
+        expect(page).to have_content("David Chen")
+        expect(page).to have_no_content("Roger Ebert")
+      end
+    end
   end
 end

@@ -62,6 +62,13 @@ get '/editor/articles/:id' do
   end
 end
 
+get '/editor/articles/:id/edit' do
+  protected! do
+    article = ArticleService.new(DB).fetch(params[:id])  
+    erb :editor_articles_edit, :locals => { :article => article }, :layout => :editor_layout
+  end
+end
+
 post "/editor/articles" do
   protected! do
     article_params = params[:article]
@@ -70,7 +77,20 @@ post "/editor/articles" do
       article_params[:title],
       article_params[:content] 
     )
-    
+
     redirect to("/editor/articles")
+  end
+end
+
+put "/editor/articles/:id" do
+  protected! do
+    article_params = params[:article]
+    article = ArticleService.new(DB).update(params[:id],
+      article_params[:author],
+      article_params[:title],
+      article_params[:content] 
+    )
+  
+    redirect to("/editor/articles/#{params[:id]}")
   end
 end
