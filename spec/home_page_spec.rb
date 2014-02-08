@@ -28,6 +28,21 @@ describe "Homepage" do
     expect(page).to have_no_content("Sports")
   end
   
+  describe "clicking on an article" do
+    it "shows the article's content" do
+      create_categories("Culture")
+      create_articles(
+        ["Computer Chess", "Roger Ebert", "Culture", "The *best*:\n\nMovie."],
+      )
+      
+      visit '/'
+      click_on "Computer Chess"
+    
+      expect(page.html).to include("<p>The <em>best</em>:</p>")
+      expect(page.html).to include("<p>Movie.</p>")
+    end
+  end
+  
   def create_categories(*categories)
     page.driver.browser.basic_authorize("editor", "editor")
     visit "/editor"
@@ -53,7 +68,7 @@ describe "Homepage" do
       
       fill_in "Title", :with => article[0]
       fill_in "Author", :with => article[1] 
-      fill_in "Content", :with => "Here's a movie by nerds, for nerds, and about nerds."
+      fill_in "Content", :with => article[3]
       select article[2], :from => "Category"
       
       click_on "Save"

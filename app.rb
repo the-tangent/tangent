@@ -55,6 +55,15 @@ get '/' do
   erb :home, :locals => { :categories => categories_with_articles }
 end
 
+get "/articles/:id" do
+  article = ArticleService.new(DB).fetch(params[:id])
+  
+  markdown_renderer = ::Redcarpet::Markdown.new(Redcarpet::Render::HTML)
+  content = markdown_renderer.render(article[:content])
+  
+  erb :articles_show, :locals => { :article => article, :content => content }
+end
+
 get '/editor' do
   protected! do
     erb :editor, :layout => :editor_layout
