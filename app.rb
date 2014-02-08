@@ -38,7 +38,21 @@ end
 DB = Sequel.connect(DB_URL)
 
 get '/' do
-  erb :home
+  categories = CategoryService.new(DB).fetch_all
+  
+  article_service = ArticleService.new(DB)
+  categories_with_articles = categories.reduce([]) do |categories, category|
+    articles = article_service.fetch_all_from_category(category[:id])
+    
+    if articles.empty?
+      categories
+    else
+      category[:articles] = articles
+      categories << category
+    end
+  end
+  
+  erb :home, :locals => { :categories => categories_with_articles }
 end
 
 get '/editor' do
