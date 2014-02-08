@@ -111,14 +111,14 @@ end
 
 get "/editor/categories" do
   protected! do
-    categories = DB[:categories].all
+    categories = CategoryService.new(DB).fetch_all
     erb :editor_categories, :locals => { :categories => categories }, :layout => :editor_layout
   end
 end
 
 post "/editor/categories" do
   protected! do
-    DB[:categories].insert(:name => params[:category][:name])
+    CategoryService.new(DB).create(params[:category][:name])
     redirect to("/editor/categories")
   end
 end
@@ -131,7 +131,7 @@ end
 
 get "/editor/categories/:id" do
   protected! do
-    category = DB[:categories].where(:id => params[:id]).first
+    category = CategoryService.new(DB).fetch(params[:id])
     articles = ArticleService.new(DB).fetch_all_from_category(category[:id])
     erb :editor_categories_show, :locals => { :category => category, :articles => articles }, :layout => :editor_layout
   end
@@ -139,14 +139,14 @@ end
 
 get "/editor/categories/:id/edit" do
   protected! do
-    category = DB[:categories].where(:id => params[:id]).first
+    category = CategoryService.new(DB).fetch(params[:id])
     erb :editor_categories_edit, :locals => { :category => category }, :layout => :editor_layout
   end
 end
 
 put "/editor/categories/:id" do
   protected! do
-    DB[:categories].where(:id => params[:id]).update(:name => params[:category][:name])
+    CategoryService.new(DB).update(params[:id], params[:category][:name])
     redirect to("/editor/categories/#{params[:id]}")
   end
 end
