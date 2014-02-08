@@ -75,8 +75,9 @@ end
 
 get '/editor/articles/:id/edit' do
   protected! do
-    article = ArticleService.new(DB).fetch(params[:id])  
-    erb :editor_articles_edit, :locals => { :article => article }, :layout => :editor_layout
+    article = ArticleService.new(DB).fetch(params[:id])
+    categories = DB[:categories].all
+    erb :editor_articles_edit, :locals => { :article => article, :categories => categories }, :layout => :editor_layout
   end
 end
 
@@ -100,6 +101,7 @@ put "/editor/articles/:id" do
     article = ArticleService.new(DB).update(params[:id],
       article_params[:author],
       article_params[:title],
+      article_params[:category],
       article_params[:content] 
     )
   

@@ -26,10 +26,11 @@ class ArticleService
     )
   end
   
-  def update(id, author, title, content)
+  def update(id, author, title, category, content)
     @db[:articles].where(:id => id).update(
       :author => author,
       :title => title,
+      :category_id => category,
       :content => content
     )
   end
