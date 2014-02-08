@@ -94,3 +94,23 @@ put "/editor/articles/:id" do
     redirect to("/editor/articles/#{params[:id]}")
   end
 end
+
+get "/editor/categories" do
+  protected! do
+    categories = DB[:categories].all
+    erb :editor_categories, :locals => { :categories => categories }, :layout => :editor_layout
+  end
+end
+
+post "/editor/categories" do
+  protected! do
+    DB[:categories].insert(:name => params[:category][:name])
+    redirect to("/editor/categories")
+  end
+end
+
+get "/editor/categories/new" do
+  protected! do
+    erb :editor_categories_new, :layout => :editor_layout
+  end
+end
