@@ -13,6 +13,7 @@ gem 'redcarpet'
 group :development do
   gem 'sqlite3'
   gem 'foreman'
+  gem 'pry'
 end
 
 group :test do

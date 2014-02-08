@@ -41,9 +41,7 @@ describe "An editor managing articles" do
         expect(page.html).to include("<p>Here is a movie by nerds, for <em>nerds</em>.</p>")
         expect(page.html).to include("<p>And, about nerds.</p>")
       end
-    end
-    
-    describe "clicking edit for an article" do
+      
       it "lets the editor edit the article" do
         click_on "Articles"
         click_on "New Article"

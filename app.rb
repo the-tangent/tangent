@@ -1,6 +1,7 @@
 require "sinatra"
 require "sequel"
 require "redcarpet"
+require "pry"
 
 require "./lib/all"
 
@@ -26,7 +27,16 @@ helpers do
   end
 end
 
-DB = Sequel.connect(ENV["DATABASE_URL"] || "sqlite://tangent.db")
+DB_URL = case ENV["RACK_ENV"]
+when "test"
+  "sqlite://tangent-test.db"
+when "development"
+  "sqlite://tangent.db"
+when "production"
+  ENV["DATABASE_URL"]
+end
+
+DB = Sequel.connect(DB_URL)
 
 get '/' do
   erb :home
@@ -112,5 +122,26 @@ end
 get "/editor/categories/new" do
   protected! do
     erb :editor_categories_new, :layout => :editor_layout
+  end
+end
+
+get "/editor/categories/:id" do
+  protected! do
+    category = DB[:categories].where(:id => params[:id]).first
+    erb :editor_categories_show, :locals => { :category => category }, :layout => :editor_layout
+  end
+end
+
+get "/editor/categories/:id/edit" do
+  protected! do
+    category = DB[:categories].where(:id => params[:id]).first
+    erb :editor_categories_edit, :locals => { :category => category }, :layout => :editor_layout
+  end
+end
+
+put "/editor/categories/:id" do
+  protected! do
+    DB[:categories].where(:id => params[:id]).update(:name => params[:category][:name])
+    redirect to("/editor/categories/#{params[:id]}")
   end
 end

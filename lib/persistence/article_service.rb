@@ -20,7 +20,7 @@ class ArticleService
   end
   
   def update(id, author, title, content)
-    @db[:articles].where(:id => id.to_i).update(
+    @db[:articles].where(:id => id).update(
       :author => author,
       :title => title,
       :content => content
