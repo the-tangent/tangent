@@ -4,9 +4,7 @@ class ArticleService
   end
   
   def fetch(id)
-    article = @db[:articles].where(:id => id).first
-    article[:category] = CategoryService.new(@db).fetch(article[:category_id])[:name]
-    article
+    @db[:articles].where(:id => id).first
   end
   
   def fetch_all
