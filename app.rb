@@ -1,7 +1,6 @@
 require "sinatra"
 require "sequel"
 require "redcarpet"
-require "pry"
 
 require "./lib/all"
 
