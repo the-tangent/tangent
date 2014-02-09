@@ -3,7 +3,7 @@
 </div>
 
 <form role="form" accept-charset="UTF-8" action="/editor/articles" method="post">
-  <%= erb :article_fields, :locals => { :article => Model.new, :categories => categories } %>
+  <%= erb :article_fields, :locals => { :article => Persistence::Model.new, :categories => categories } %>
   
   <button type="submit" class="btn btn-default">Save</button>
 </form>

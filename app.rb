@@ -38,9 +38,9 @@ end
 DB = Sequel.connect(DB_URL)
 
 get '/' do
-  categories = CategoryService.new(DB).fetch_all
+  categories = Persistence::CategoryService.new(DB).fetch_all
   
-  article_service = ArticleService.new(DB)
+  article_service = Persistence::ArticleService.new(DB)
   categories_with_articles = categories.reduce([]) do |categories, category|
     articles = article_service.fetch_all_from_category(category.id)
     
@@ -53,7 +53,7 @@ get '/' do
         :articles => articles
       }
       
-      categories << Model.new(category_with_articles)
+      categories << Persistence::Model.new(category_with_articles)
     end
   end
   
@@ -61,7 +61,7 @@ get '/' do
 end
 
 get "/articles/:id" do
-  article = ArticleService.new(DB).fetch(params[:id])
+  article = Persistence::ArticleService.new(DB).fetch(params[:id])
   widget = Widget::Article.new(article)
   
   erb :articles_show, :locals => { :article => widget }
@@ -75,21 +75,21 @@ end
 
 get '/editor/articles' do
   protected! do
-    articles = ArticleService.new(DB).fetch_all
+    articles = Persistence::ArticleService.new(DB).fetch_all
     erb :editor_articles, :locals => { :articles => articles }, :layout => :editor_layout
   end
 end
 
 get '/editor/articles/new' do
   protected! do
-    categories = CategoryService.new(DB).fetch_all
+    categories = Persistence::CategoryService.new(DB).fetch_all
     erb :editor_articles_new, :locals => { :categories => categories }, :layout => :editor_layout
   end
 end
 
 get '/editor/articles/:id' do
   protected! do
-    article = ArticleService.new(DB).fetch(params[:id])
+    article = Persistence::ArticleService.new(DB).fetch(params[:id])
     widget = Widget::Article.new(article)
     
     erb :editor_articles_show, :locals => { :article => widget }, :layout => :editor_layout
@@ -98,8 +98,8 @@ end
 
 get '/editor/articles/:id/edit' do
   protected! do
-    article = ArticleService.new(DB).fetch(params[:id])
-    categories = CategoryService.new(DB).fetch_all
+    article = Persistence::ArticleService.new(DB).fetch(params[:id])
+    categories = Persistence::CategoryService.new(DB).fetch_all
     erb :editor_articles_edit, :locals => { :article => article, :categories => categories }, :layout => :editor_layout
   end
 end
@@ -107,7 +107,7 @@ end
 post "/editor/articles" do
   protected! do
     article_params = params[:article]
-    ArticleService.new(DB).create(
+    Persistence::ArticleService.new(DB).create(
       article_params[:author],
       article_params[:title],
       article_params[:category],
@@ -121,7 +121,7 @@ end
 put "/editor/articles/:id" do
   protected! do
     article_params = params[:article]
-    article = ArticleService.new(DB).update(params[:id],
+    Persistence::ArticleService.new(DB).update(params[:id],
       article_params[:author],
       article_params[:title],
       article_params[:category],
@@ -134,14 +134,14 @@ end
 
 get "/editor/categories" do
   protected! do
-    categories = CategoryService.new(DB).fetch_all
+    categories = Persistence::CategoryService.new(DB).fetch_all
     erb :editor_categories, :locals => { :categories => categories }, :layout => :editor_layout
   end
 end
 
 post "/editor/categories" do
   protected! do
-    CategoryService.new(DB).create(params[:category][:name])
+    Persistence::CategoryService.new(DB).create(params[:category][:name])
     redirect to("/editor/categories")
   end
 end
@@ -154,22 +154,22 @@ end
 
 get "/editor/categories/:id" do
   protected! do
-    category = CategoryService.new(DB).fetch(params[:id])
-    articles = ArticleService.new(DB).fetch_all_from_category(category[:id])
+    category = Persistence::CategoryService.new(DB).fetch(params[:id])
+    articles = Persistence::ArticleService.new(DB).fetch_all_from_category(category[:id])
     erb :editor_categories_show, :locals => { :category => category, :articles => articles }, :layout => :editor_layout
   end
 end
 
 get "/editor/categories/:id/edit" do
   protected! do
-    category = CategoryService.new(DB).fetch(params[:id])
+    category = Persistence::CategoryService.new(DB).fetch(params[:id])
     erb :editor_categories_edit, :locals => { :category => category }, :layout => :editor_layout
   end
 end
 
 put "/editor/categories/:id" do
   protected! do
-    CategoryService.new(DB).update(params[:id], params[:category][:name])
+    Persistence::CategoryService.new(DB).update(params[:id], params[:category][:name])
     redirect to("/editor/categories/#{params[:id]}")
   end
 end
