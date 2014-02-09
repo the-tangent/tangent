@@ -1,8 +1,15 @@
 require "sinatra"
 require "sequel"
 require "redcarpet"
+require "pharrell"
 
 require "./lib/all"
+
+Pharrell.config(:base) do |config|
+  config.bind(System::Clock, System::Clock.new)
+end
+
+Pharrell.use_config(:base)
 
 helpers do
   def protected!(&blk)
@@ -48,7 +55,9 @@ get '/' do
     end
   end
   
-  erb :home, :locals => { :categories => categories_with_articles }
+  date = Pharrell.instance_for(System::Clock).now.strftime("%e %B %Y")
+  
+  erb :home, :locals => { :categories => categories_with_articles, :date => date }
 end
 
 get "/articles/:id" do

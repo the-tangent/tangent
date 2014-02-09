@@ -3,6 +3,9 @@ require "pry"
 
 describe "Homepage" do
   include Capybara::DSL
+  include Pharrell::Injectable
+  
+  injected :clock, System::Clock
 
   before do
     Capybara.app = Sinatra::Application.new
@@ -26,6 +29,13 @@ describe "Homepage" do
     expect(page).to have_content("Heather Long")
     
     expect(page).to have_no_content("Sports")
+  end
+  
+  it "shows the current date" do
+    clock.set_time("24 February 2014")
+  
+    visit "/"
+    expect(page).to have_content("24 February 2014")
   end
   
   describe "clicking on an article" do

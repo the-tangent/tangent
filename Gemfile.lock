@@ -21,6 +21,7 @@ GEM
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
     pg (0.15.1)
+    pharrell (0.7.0)
     pry (0.9.12.3)
       coderay (~> 1.0)
       method_source (~> 0.8)
@@ -61,6 +62,7 @@ DEPENDENCIES
   emoji-rspec
   foreman
   pg (= 0.15.1)
+  pharrell
   pry
   puma
   redcarpet
