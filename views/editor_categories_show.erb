@@ -6,6 +6,6 @@
 <% articles.each do |article| %>
     <h4>
       <a href="/editor/articles/<%= article[:id] %>">
-        <%= article[:title] %>
-      </a> <small><%= article[:author] %></small></h4>
+        <%= article.title %>
+      </a> <small><%= article.author %></small></h4>
 <% end %>

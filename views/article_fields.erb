@@ -1,18 +1,18 @@
 <div class="form-group">
   <label for="article_title">Title</label>
-  <input type="text" class="form-control" id="article_title" name="article[title]" value="<%= article[:title] %>">
+  <input type="text" class="form-control" id="article_title" name="article[title]" value="<%= article.title %>">
 </div>
 
 <div class="form-group">
   <label for="article_author">Author</label>
-  <input type="text" class="form-control" id="article_author" name="article[author]" value="<%= article[:author] %>">
+  <input type="text" class="form-control" id="article_author" name="article[author]" value="<%= article.author %>">
 </div>
 
 <div class="form-group">
   <label for="article_category">Category</label>
   <select type="text" class="form-control" id="article_category" name="article[category]">
     <% categories.each do |category| %>
-      <% if category[:id] == article[:category_id]%>
+      <% if category[:id] == article.category_id %>
         <option value="<%= category[:id] %>" selected><%= category[:name] %></option>
       <% else %>
         <option value="<%= category[:id] %>"><%= category[:name] %></option>
@@ -23,5 +23,5 @@
 
 <div class="form-group">
   <label for="article_content">Content</label>
-  <textarea id="article_content" class="form-control" name="article[content]" rows="20" cols="50"><%= article[:content] %></textarea> 
+  <textarea id="article_content" class="form-control" name="article[content]" rows="20" cols="50"><%= article.content %></textarea> 
 </div>

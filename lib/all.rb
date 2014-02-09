@@ -1,3 +1,4 @@
+require_relative "persistence/model"
 require_relative "persistence/article_service"
 require_relative "persistence/category_service"
 

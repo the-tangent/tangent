@@ -6,8 +6,8 @@
   <h3><%= category[:name] %></h3>
   <% category[:articles].each do |article| %>
       <h4>
-        <a href="/articles/<%= article[:id] %>">
-          <%= article[:title] %>
-        </a> <small><%= article[:author] %></small></h4>
+        <a href="/articles/<%= article.id %>">
+          <%= article.title %>
+        </a> <small><%= article.author %></small></h4>
   <% end %>
 <% end %>

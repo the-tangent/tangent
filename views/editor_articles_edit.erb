@@ -2,7 +2,7 @@
   <h3>Edit Article</h3>
 </div>
 
-<form role="form" accept-charset="UTF-8" action="/editor/articles/<%= article[:id] %>" method="post">
+<form role="form" accept-charset="UTF-8" action="/editor/articles/<%= article.id %>" method="post">
   <input type="hidden" name="_method" value="put" />
   
   <%= erb :article_fields, :locals => { :article => article, :categories => categories } %>
