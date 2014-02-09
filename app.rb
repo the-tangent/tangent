@@ -146,7 +146,7 @@ end
 get "/editor/categories/:id" do
   protected! do
     category = Persistence::CategoryService.new(DB).fetch(params[:id])
-    articles = Persistence::ArticleService.new(DB).fetch_all_from_category(category[:id])
+    articles = Persistence::ArticleService.new(DB).fetch_all_from_category(category.id)
     erb :editor_categories_show, :locals => { :category => category, :articles => articles }, :layout => :editor_layout
   end
 end
