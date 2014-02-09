@@ -26,7 +26,7 @@ get '/' do
     end
   end
   
-  date = Pharrell.instance_for(System::Clock).now.strftime("%e %B %Y")
+  date = clock.now.strftime("%e %B %Y")
   
   erb :home, :locals => { :categories => categories_with_articles, :date => date }
 end
@@ -154,4 +154,8 @@ def protected!(&blk)
     headers['WWW-Authenticate'] = 'Basic realm="Restricted Area"'
     halt 401, "Not authorized\n"
   end
+end
+
+def clock
+  Pharrell.instance_for(System::Clock)
 end
