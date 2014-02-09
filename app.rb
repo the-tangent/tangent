@@ -26,16 +26,7 @@ helpers do
   end
 end
 
-DB_URL = case ENV["RACK_ENV"]
-when "test"
-  "sqlite://tangent-test.db"
-when "development"
-  "sqlite://tangent.db"
-when "production"
-  ENV["DATABASE_URL"]
-end
-
-DB = Sequel.connect(DB_URL)
+DB = Persistence::Database.new(ENV["RACK_ENV"], ENV["DATABASE_URL"]).connect
 
 get '/' do
   categories = Persistence::CategoryService.new(DB).fetch_all
