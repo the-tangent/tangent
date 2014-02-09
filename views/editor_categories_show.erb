@@ -1,11 +1,11 @@
 <div class="page-header">
-  <a href="/editor/categories/<%= category[:id] %>/edit" class="btn btn-default pull-right">Edit</a>
-  <h3><%= category[:name] %>
+  <a href="/editor/categories/<%= category.id %>/edit" class="btn btn-default pull-right">Edit</a>
+  <h3><%= category.name %>
 </div>
 
 <% articles.each do |article| %>
     <h4>
-      <a href="/editor/articles/<%= article[:id] %>">
+      <a href="/editor/articles/<%= article.id %>">
         <%= article.title %>
       </a> <small><%= article.author %></small></h4>
 <% end %>

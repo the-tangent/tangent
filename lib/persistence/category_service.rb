@@ -4,11 +4,11 @@ class CategoryService
   end
   
   def fetch(id)
-    @db[:categories].where(:id => id).first
+    Model.new(@db[:categories].where(:id => id).first)
   end
   
   def fetch_all
-    DB[:categories].all
+    DB[:categories].all.map { |hash| Model.new(hash) }
   end
   
   def create(name)

@@ -3,8 +3,8 @@
 </div>
 
 <% categories.each do |category| %>
-  <h3><%= category[:name] %></h3>
-  <% category[:articles].each do |article| %>
+  <h3><%= category.name %></h3>
+  <% category.articles.each do |article| %>
       <h4>
         <a href="/articles/<%= article.id %>">
           <%= article.title %>

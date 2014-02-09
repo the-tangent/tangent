@@ -12,10 +12,10 @@
   <label for="article_category">Category</label>
   <select type="text" class="form-control" id="article_category" name="article[category]">
     <% categories.each do |category| %>
-      <% if category[:id] == article.category_id %>
-        <option value="<%= category[:id] %>" selected><%= category[:name] %></option>
+      <% if category.id == article.category_id %>
+        <option value="<%= category.id %>" selected><%= category.name %></option>
       <% else %>
-        <option value="<%= category[:id] %>"><%= category[:name] %></option>
+        <option value="<%= category.id %>"><%= category.name %></option>
       <% end %>
     <% end %>  
   </select>

@@ -53,7 +53,7 @@ get '/' do
         :articles => articles
       }
       
-      categories << category_with_articles
+      categories << Model.new(category_with_articles)
     end
   end
   
@@ -82,7 +82,7 @@ end
 
 get '/editor/articles/new' do
   protected! do
-    categories = DB[:categories].all
+    categories = CategoryService.new(DB).fetch_all
     erb :editor_articles_new, :locals => { :categories => categories }, :layout => :editor_layout
   end
 end
@@ -99,7 +99,7 @@ end
 get '/editor/articles/:id/edit' do
   protected! do
     article = ArticleService.new(DB).fetch(params[:id])
-    categories = DB[:categories].all
+    categories = CategoryService.new(DB).fetch_all
     erb :editor_articles_edit, :locals => { :article => article, :categories => categories }, :layout => :editor_layout
   end
 end
