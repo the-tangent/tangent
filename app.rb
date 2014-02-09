@@ -47,8 +47,13 @@ get '/' do
     if articles.empty?
       categories
     else
-      category[:articles] = articles
-      categories << category
+      category_with_articles = {
+        :id => category[:id],
+        :name => category[:name],
+        :articles => articles
+      }
+      
+      categories << category_with_articles
     end
   end
   
@@ -57,11 +62,9 @@ end
 
 get "/articles/:id" do
   article = ArticleService.new(DB).fetch(params[:id])
+  widget = Widget::Article.new(article)
   
-  markdown_renderer = ::Redcarpet::Markdown.new(Redcarpet::Render::HTML)
-  content = markdown_renderer.render(article[:content])
-  
-  erb :articles_show, :locals => { :article => article, :content => content }
+  erb :articles_show, :locals => { :article => widget }
 end
 
 get '/editor' do
@@ -87,11 +90,9 @@ end
 get '/editor/articles/:id' do
   protected! do
     article = ArticleService.new(DB).fetch(params[:id])
+    widget = Widget::Article.new(article)
     
-    markdown_renderer = ::Redcarpet::Markdown.new(Redcarpet::Render::HTML)
-    content = markdown_renderer.render(article[:content])
-    
-    erb :editor_articles_show, :locals => { :article => article, :content => content }, :layout => :editor_layout
+    erb :editor_articles_show, :locals => { :article => widget }, :layout => :editor_layout
   end
 end
 
