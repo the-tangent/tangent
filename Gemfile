@@ -15,6 +15,7 @@ group :development do
   gem 'sqlite3'
   gem 'foreman'
   gem 'pry'
+  gem 'rake'
 end
 
 group :test do
