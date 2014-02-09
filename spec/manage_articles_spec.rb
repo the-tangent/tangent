@@ -5,7 +5,7 @@ describe "An editor managing articles" do
   include Capybara::DSL
 
   before do
-    Capybara.app = Sinatra::Application.new
+    Capybara.app = Tangent.new
   end
   
   describe "on the article list page" do

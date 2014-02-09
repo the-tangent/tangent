@@ -4,7 +4,7 @@ describe "An editor managing categories" do
   include Capybara::DSL
 
   before do
-    Capybara.app = Sinatra::Application.new
+    Capybara.app = Tangent.new
   end
   
   describe "on the categories list page" do

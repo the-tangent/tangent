@@ -8,7 +8,7 @@ describe "Homepage" do
   injected :clock, System::Clock
 
   before do
-    Capybara.app = Sinatra::Application.new
+    Capybara.app = Tangent.new
   end
 
   it "lists the categories with articles" do
