@@ -60,34 +60,34 @@ get '/' do
   erb :home, :locals => { :categories => categories_with_articles, :date => date }
 end
 
-get "/articles/:id" do
+get "/articles/:id/?" do
   article = Persistence::ArticleService.new(DB).fetch(params[:id])
   widget = Widget::Article.new(article)
   
   erb :articles_show, :locals => { :article => widget }
 end
 
-get '/editor' do
+get '/editor/?' do
   protected! do
     erb :editor, :layout => :editor_layout
   end
 end
 
-get '/editor/articles' do
+get '/editor/articles/?' do
   protected! do
     articles = Persistence::ArticleService.new(DB).fetch_all
     erb :editor_articles, :locals => { :articles => articles }, :layout => :editor_layout
   end
 end
 
-get '/editor/articles/new' do
+get '/editor/articles/new/?' do
   protected! do
     categories = Persistence::CategoryService.new(DB).fetch_all
     erb :editor_articles_new, :locals => { :categories => categories }, :layout => :editor_layout
   end
 end
 
-get '/editor/articles/:id' do
+get '/editor/articles/:id/?' do
   protected! do
     article = Persistence::ArticleService.new(DB).fetch(params[:id])
     widget = Widget::Article.new(article)
@@ -96,7 +96,7 @@ get '/editor/articles/:id' do
   end
 end
 
-get '/editor/articles/:id/edit' do
+get '/editor/articles/:id/edit/?' do
   protected! do
     article = Persistence::ArticleService.new(DB).fetch(params[:id])
     categories = Persistence::CategoryService.new(DB).fetch_all
@@ -104,7 +104,7 @@ get '/editor/articles/:id/edit' do
   end
 end
 
-post "/editor/articles" do
+post "/editor/articles/?" do
   protected! do
     article_params = params[:article]
     Persistence::ArticleService.new(DB).create(
@@ -118,7 +118,7 @@ post "/editor/articles" do
   end
 end
 
-put "/editor/articles/:id" do
+put "/editor/articles/:id/?" do
   protected! do
     article_params = params[:article]
     Persistence::ArticleService.new(DB).update(params[:id],
@@ -132,27 +132,27 @@ put "/editor/articles/:id" do
   end
 end
 
-get "/editor/categories" do
+get "/editor/categories/?" do
   protected! do
     categories = Persistence::CategoryService.new(DB).fetch_all
     erb :editor_categories, :locals => { :categories => categories }, :layout => :editor_layout
   end
 end
 
-post "/editor/categories" do
+post "/editor/categories/?" do
   protected! do
     Persistence::CategoryService.new(DB).create(params[:category][:name])
     redirect to("/editor/categories")
   end
 end
 
-get "/editor/categories/new" do
+get "/editor/categories/new/?" do
   protected! do
     erb :editor_categories_new, :layout => :editor_layout
   end
 end
 
-get "/editor/categories/:id" do
+get "/editor/categories/:id/?" do
   protected! do
     category = Persistence::CategoryService.new(DB).fetch(params[:id])
     articles = Persistence::ArticleService.new(DB).fetch_all_from_category(category.id)
@@ -160,14 +160,14 @@ get "/editor/categories/:id" do
   end
 end
 
-get "/editor/categories/:id/edit" do
+get "/editor/categories/:id/edit/?" do
   protected! do
     category = Persistence::CategoryService.new(DB).fetch(params[:id])
     erb :editor_categories_edit, :locals => { :category => category }, :layout => :editor_layout
   end
 end
 
-put "/editor/categories/:id" do
+put "/editor/categories/:id/?" do
   protected! do
     Persistence::CategoryService.new(DB).update(params[:id], params[:category][:name])
     redirect to("/editor/categories/#{params[:id]}")
