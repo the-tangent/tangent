@@ -14,9 +14,9 @@ module Persistence
     def db_url 
       case @rack_env
         when "test"
-          "sqlite://tangent-test.db"
+          "sqlite://db/tangent-test.db"
         when "development"
-          "sqlite://tangent.db"
+          "sqlite://db/tangent.db"
         when "production"
           @database_url
       end
