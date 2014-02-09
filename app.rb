@@ -6,28 +6,6 @@ require "pharrell"
 require "./lib/all"
 require "./config"
 
-helpers do
-  def protected!(&blk)
-    if authorized?
-      blk.call
-    else
-      headers['WWW-Authenticate'] = 'Basic realm="Restricted Area"'
-      halt 401, "Not authorized\n"
-    end
-  end
-
-  def authorized?
-    editor_credentials = if ENV["RACK_ENV"] == "production"
-      [ENV["ADMIN_USERNAME"], ENV["ADMIN_PASSWORD"]]
-    else
-      ["editor", "editor"]
-    end      
-    
-    @auth ||=  Rack::Auth::Basic::Request.new(request.env)
-    @auth.provided? and @auth.basic? and @auth.credentials and @auth.credentials == editor_credentials
-  end
-end
-
 DB = Persistence::Database.new(ENV["RACK_ENV"], ENV["DATABASE_URL"]).connect
 
 get '/' do
@@ -166,5 +144,16 @@ put "/editor/categories/:id/?" do
   protected! do
     Persistence::CategoryService.new(DB).update(params[:id], params[:category][:name])
     redirect to("/editor/categories/#{params[:id]}")
+  end
+end
+
+def protected!(&blk)
+  auth = Http::BasicAuth.new(request, ENV["RACK_ENV"], ENV["ADMIN_USERNAME"], ENV["ADMIN_PASSWORD"])
+  
+  if auth.authorized?
+    blk.call
+  else
+    headers['WWW-Authenticate'] = 'Basic realm="Restricted Area"'
+    halt 401, "Not authorized\n"
   end
 end
