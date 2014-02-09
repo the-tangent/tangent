@@ -5,10 +5,7 @@
 <form role="form" accept-charset="UTF-8" action="/editor/categories/<%= category[:id] %>" method="post">
   <input type="hidden" name="_method" value="put" />
   
-  <div class="form-group">
-    <label for="category_name">Name</label>
-    <input type="text" class="form-control" id="category_name" name="category[name]" value="<%= category[:name] %>">
-  </div>
+  <%= erb :category_fields, :locals => { :category => category } %>
   
   <button type="submit" class="btn btn-default">Save</button>
 </form>

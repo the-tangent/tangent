@@ -3,29 +3,7 @@
 </div>
 
 <form role="form" accept-charset="UTF-8" action="/editor/articles" method="post">
-  <div class="form-group">
-    <label for="article_title">Title</label>
-    <input type="text" class="form-control" id="article_title" name="article[title]">
-  </div>
-  
-  <div class="form-group">
-    <label for="article_author">Author</label>
-    <input type="text" class="form-control" id="article_author" name="article[author]">
-  </div>
-  
-  <div class="form-group">
-    <label for="article_category">Category</label>
-    <select type="text" class="form-control" id="article_category" name="article[category]">
-      <% categories.each do |category| %>
-        <option value="<%= category[:id] %>"><%= category[:name] %></option>
-      <% end %>  
-    </select>
-  </div>
-  
-  <div class="form-group">
-    <label for="article_content">Content</label>
-    <textarea id="article_content" class="form-control" name="article[content]" rows="20" cols="50"></textarea> 
-  </div>
+  <%= erb :article_fields, :locals => { :article => {}, :categories => categories } %>
   
   <button type="submit" class="btn btn-default">Save</button>
 </form>
