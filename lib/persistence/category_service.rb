@@ -17,6 +17,16 @@ module Persistence
         attach_articles(categories, articles)
       end
     end
+  
+    def create(name)
+      @db[:categories].insert(:name => name)
+    end
+  
+    def update(id, name)
+      @db[:categories].where(:id => id).update(:name => name)
+    end
+    
+    private
     
     def attach_articles(categories, article_service)
       categories_with_articles = categories.reduce([]) do |categories, category|
@@ -34,14 +44,6 @@ module Persistence
           categories << Model.new(category_with_articles)
         end
       end
-    end
-  
-    def create(name)
-      @db[:categories].insert(:name => name)
-    end
-  
-    def update(id, name)
-      @db[:categories].where(:id => id).update(:name => name)
     end
   end
 end
