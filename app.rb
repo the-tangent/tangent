@@ -4,12 +4,7 @@ require "redcarpet"
 require "pharrell"
 
 require "./lib/all"
-
-Pharrell.config(:base) do |config|
-  config.bind(System::Clock, System::Clock.new)
-end
-
-Pharrell.use_config(:base)
+require "./config"
 
 helpers do
   def protected!(&blk)
