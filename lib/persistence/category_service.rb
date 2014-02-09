@@ -8,8 +8,32 @@ module Persistence
       Model.new(@db[:categories].where(:id => id).first)
     end
   
-    def fetch_all
-      DB[:categories].all.map { |hash| Model.new(hash) }
+    def fetch_all(articles: nil)
+      categories = DB[:categories].all.map { |hash| Model.new(hash) }
+      
+      if articles.nil?
+        categories
+      else
+        attach_articles(categories, articles)
+      end
+    end
+    
+    def attach_articles(categories, article_service)
+      categories_with_articles = categories.reduce([]) do |categories, category|
+        articles = article_service.fetch_all_from_category(category.id)
+    
+        if articles.empty?
+          categories
+        else
+          category_with_articles = {
+            :id => category.id,
+            :name => category.name,
+            :articles => articles
+          }
+      
+          categories << Model.new(category_with_articles)
+        end
+      end
     end
   
     def create(name)
