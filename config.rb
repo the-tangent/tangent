@@ -3,3 +3,5 @@ Pharrell.config(:base) do |config|
 end
 
 Pharrell.use_config(:base)
+
+DB = Persistence::Database.new(ENV["RACK_ENV"], ENV["DATABASE_URL"]).connect

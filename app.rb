@@ -6,8 +6,6 @@ require "pharrell"
 require "./lib/all"
 require "./config"
 
-DB = Persistence::Database.new(ENV["RACK_ENV"], ENV["DATABASE_URL"]).connect
-
 get '/' do
   categories = Persistence::CategoryService.new(DB).fetch_all
   
