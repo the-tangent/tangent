@@ -3,10 +3,10 @@ module Widget
     attr_reader :id, :title, :author
     
     def initialize(article)
-      @id = article[:id]
-      @title = article[:title]
-      @author = article[:author]
-      @content = article[:content]
+      @id = article.id
+      @title = article.title
+      @author = article.author
+      @content = article.content
     end
     
     def content

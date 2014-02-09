@@ -42,14 +42,14 @@ get '/' do
   
   article_service = ArticleService.new(DB)
   categories_with_articles = categories.reduce([]) do |categories, category|
-    articles = article_service.fetch_all_from_category(category[:id])
+    articles = article_service.fetch_all_from_category(category.id)
     
     if articles.empty?
       categories
     else
       category_with_articles = {
-        :id => category[:id],
-        :name => category[:name],
+        :id => category.id,
+        :name => category.name,
         :articles => articles
       }
       
