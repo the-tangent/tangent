@@ -1,34 +1,4 @@
-require "sinatra/base"
-require "sequel"
-require "redcarpet"
-require "pharrell"
-
-require "./lib/all"
-require "./config"
-
-class BaseApp < Sinatra::Base
-  enable :method_override, :logging
-end
-
-class Tangent < BaseApp
-  include Pharrell::Injectable
-  
-  injected :clock, System::Clock
-  
-  get '/' do
-    categories = category_service.fetch_all(:articles => article_service)
-    date = clock.now
-  
-    erb :home, :locals => { :categories => categories, :date => date }
-  end
-
-  get "/articles/:id/?" do
-    article = article_service.fetch(params[:id])
-    widget = Widget::Article.new(article)
-  
-    erb :articles_show, :locals => { :article => widget }
-  end
-
+class Editor < Base
   get '/editor/?' do
     protected! do
       erb :editor, :layout => :editor_layout
@@ -135,6 +105,8 @@ class Tangent < BaseApp
       redirect to("/editor/categories/#{params[:id]}")
     end
   end
+  
+  private
 
   def protected!(&blk)
     auth = Http::BasicAuth.new(request, ENV["RACK_ENV"], ENV["ADMIN_USERNAME"], ENV["ADMIN_PASSWORD"])
@@ -145,13 +117,5 @@ class Tangent < BaseApp
       headers['WWW-Authenticate'] = 'Basic realm="Restricted Area"'
       halt 401, "Not authorized\n"
     end
-  end
-
-  def category_service
-    Persistence::CategoryService.new(DB)
-  end
-
-  def article_service
-    Persistence::ArticleService.new(DB)
   end
 end

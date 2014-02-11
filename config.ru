@@ -1,2 +1,2 @@
-require './app'
+require './tangent'
 run Tangent

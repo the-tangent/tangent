@@ -1,13 +1,13 @@
 ENV["RACK_ENV"] = "test"
 
-require_relative '../app'
+require_relative '../tangent'
 require_relative "support/fake_clock"
 require 'capybara'
 require 'capybara/dsl'
 require 'rspec'
 require 'pharrell'
 
-Pharrell.config(:test) do |config|
+Pharrell.config(:test, :extends => :base) do |config|
   config.bind(System::Clock, FakeClock.new)
 end
 
