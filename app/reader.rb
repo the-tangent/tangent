@@ -1,4 +1,4 @@
-class Reader < Editor  
+class Reader < Base
   injected :clock, System::Clock
   
   get '/' do

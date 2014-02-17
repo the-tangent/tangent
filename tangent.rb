@@ -11,5 +11,7 @@ require "./app/base"
 require "./app/editor"
 require "./app/reader"
 
-class Tangent < Reader
+class Tangent < Sinatra::Base
+  use Reader
+  use Editor
 end
