@@ -3,7 +3,7 @@ class Reader < Base
    
   get "/" do
     if ENV["RACK_ENV"] == "production"
-      redirect_to("/manifesto")
+      redirect to("/manifesto")
     else
       redirect to("/home")
     end
