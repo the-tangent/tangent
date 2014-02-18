@@ -19,7 +19,7 @@ module Sinatra
     private
     
     def authorized?
-      editor_credentials = if ENV["RACK_ENV"] == "production"
+      admin_credentials = if ENV["RACK_ENV"] == "production"
         [ENV["ADMIN_USERNAME"], ENV["ADMIN_PASSWORD"]]
       else
         ["admin", "admin"]
