@@ -1,5 +1,5 @@
 require "sinatra/base"
-require "./extensions/sinatra/nedry"
+require "sinatra/nedry"
 
 require "sequel"
 require "redcarpet"
