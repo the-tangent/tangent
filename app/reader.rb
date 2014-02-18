@@ -9,21 +9,36 @@ class Reader < Base
     end
   end
   
-  get "/home" do
-    categories = category_service.fetch_all(:articles => article_service)
-    date = clock.now
-
-    erb :home, :locals => { :categories => categories, :date => date }
-  end
-  
   get "/manifesto" do
     erb :manifesto
   end
   
-  get "/articles/:id/?" do
-    article = article_service.fetch(params[:id])
-    widget = Widget::Article.new(article)
+  get "/home" do
+    flagged! do
+      categories = category_service.fetch_all(:articles => article_service)
+      date = clock.now
+
+      erb :home, :locals => { :categories => categories, :date => date }
+    end
+  end
   
-    erb :articles_show, :locals => { :article => widget }
+  get "/articles/:id/?" do
+    flagged! do
+      article = article_service.fetch(params[:id])
+      widget = Widget::Article.new(article)
+  
+      erb :articles_show, :locals => { :article => widget }
+    end
+  end
+  
+  def flagged!(&blk)
+    auth = Http::BasicAuth.new(request, ENV["RACK_ENV"], ENV["ADMIN_USERNAME"], ENV["ADMIN_PASSWORD"])
+  
+    if auth.authorized? || ENV["RACK_ENV"] != "production"
+      blk.call
+    else
+      headers['WWW-Authenticate'] = 'Basic realm="Restricted Area"'
+      halt 401, "Not authorized\n"
+    end
   end
 end
