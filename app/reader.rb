@@ -1,4 +1,6 @@
 class Reader < Base
+  helpers Sinatra::Nedry
+  
   injected :clock, System::Clock
    
   get "/" do
@@ -28,16 +30,6 @@ class Reader < Base
       widget = Widget::Article.new(article)
   
       erb :articles_show, :locals => { :article => widget }
-    end
-  end
-  
-  def flagged!(&blk)
-    auth = Http::BasicAuth.new(request, ENV["RACK_ENV"], ENV["ADMIN_USERNAME"], ENV["ADMIN_PASSWORD"])
-  
-    if auth.authorized? || ENV["RACK_ENV"] != "production"
-      blk.call
-    else
-      not_authorized
     end
   end
 end

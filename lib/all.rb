@@ -6,5 +6,3 @@ require_relative "persistence/database"
 require_relative "widget/article"
 
 require_relative "system/clock"
-
-require_relative "http/basic_auth"

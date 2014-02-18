@@ -10,7 +10,7 @@ describe "An editor managing articles" do
   
   describe "on the article list page" do
     before do
-      page.driver.browser.basic_authorize("editor", "editor")
+      page.driver.browser.basic_authorize("admin", "admin")
       visit "/editor" 
       
       click_on "Categories"

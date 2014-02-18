@@ -1,4 +1,6 @@
 class Editor < Base
+  helpers Sinatra::Nedry
+  
   get '/editor/?' do
     protected! do
       erb :editor, :layout => :editor_layout
@@ -103,18 +105,6 @@ class Editor < Base
     protected! do
       category_service.update(params[:id], params[:category][:name])
       redirect to("/editor/categories/#{params[:id]}")
-    end
-  end
-  
-  private
-
-  def protected!(&blk)
-    auth = Http::BasicAuth.new(request, ENV["RACK_ENV"], ENV["ADMIN_USERNAME"], ENV["ADMIN_PASSWORD"])
-  
-    if auth.authorized?
-      blk.call
-    else
-      not_authorized
     end
   end
 end

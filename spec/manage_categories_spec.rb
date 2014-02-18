@@ -9,7 +9,7 @@ describe "An editor managing categories" do
   
   describe "on the categories list page" do
     before do
-      page.driver.browser.basic_authorize("editor", "editor")
+      page.driver.browser.basic_authorize("admin", "admin")
       visit "/editor" 
     end
     

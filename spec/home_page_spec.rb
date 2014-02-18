@@ -54,7 +54,7 @@ describe "Homepage" do
   end
   
   def create_categories(*categories)
-    page.driver.browser.basic_authorize("editor", "editor")
+    page.driver.browser.basic_authorize("admin", "admin")
     visit "/editor"
     
     categories.each do |category|
@@ -69,7 +69,7 @@ describe "Homepage" do
   end
   
   def create_articles(*articles)
-    page.driver.browser.basic_authorize("editor", "editor")
+    page.driver.browser.basic_authorize("admin", "admin")
     visit "/editor"
     
     articles.each do |article|
