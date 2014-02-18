@@ -37,8 +37,7 @@ class Reader < Base
     if auth.authorized? || ENV["RACK_ENV"] != "production"
       blk.call
     else
-      headers['WWW-Authenticate'] = 'Basic realm="Restricted Area"'
-      halt 401, "Not authorized\n"
+      not_authorized
     end
   end
 end
