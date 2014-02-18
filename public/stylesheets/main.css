@@ -1,3 +1,15 @@
 body {
   padding-bottom: 24px;
 }
+
+.manifesto {
+  margin-top: 32px;
+  font-size: 20px;
+  font-weight: 300;
+}
+
+@media (min-width: 768px) {
+  .manifesto {
+    text-align: justify;
+  }
+}
