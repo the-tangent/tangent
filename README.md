@@ -1,7 +1,7 @@
 tangent
 =======
 
-Tangent is an online newspaper that hopes to enable people to write about what they care about.
+We’re going to start a newspaper. Online. Why? Because we’re bored of newspapers but we’re not bored of news.
 
 ## Setup
 1. Install [Ruby](https://www.ruby-lang.org/en/) (tangent currently uses Ruby 2.0.x)
