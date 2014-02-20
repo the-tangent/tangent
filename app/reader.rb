@@ -1,7 +1,5 @@
 class Reader < Base
   helpers Sinatra::Nedry
-  
-  injected :clock, System::Clock
    
   get "/" do
     if ENV["RACK_ENV"] == "production"
@@ -18,9 +16,8 @@ class Reader < Base
   get "/home" do
     flagged! do
       categories = category_service.fetch_all(:articles => article_service)
-      date = clock.now
-
-      erb :home, :locals => { :categories => categories, :date => date }
+      rows = categories.each_slice(3)
+      erb :home, :locals => { :rows => rows }
     end
   end
   

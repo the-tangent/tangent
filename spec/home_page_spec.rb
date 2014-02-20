@@ -31,13 +31,6 @@ describe "Homepage" do
     expect(page).to have_no_content("Sports")
   end
   
-  it "shows the current date" do
-    clock.set_time("24 February 2014")
-  
-    visit "/"
-    expect(page).to have_content("24 February 2014")
-  end
-  
   describe "clicking on an article" do
     it "shows the article's content" do
       create_categories("Culture")

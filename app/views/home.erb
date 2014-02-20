@@ -1,14 +1,18 @@
 <div class="page-header">
-  <p class="pull-right"><%= date.strftime("%e %B %Y") %></p>
   <h2>The Tangent</h2>
 </div>
-
-<% categories.each do |category| %>
-  <h3><%= category.name %></h3>
-  <% category.articles.each do |article| %>
-      <h4>
-        <a href="/articles/<%= article.id %>">
-          <%= article.title %>
-        </a> <small><%= article.author %></small></h4>
-  <% end %>
+<% rows.each do |categories| %>
+  <div class="row">
+    <% categories.each do |category| %>
+      <div class="col-lg-4">
+        <h3><%= category.name %></h3>
+        <% category.articles.each do |article| %>
+            <h4>
+              <a href="/articles/<%= article.id %>">
+                <%= article.title %>
+              </a> <small><%= article.author %></small></h4>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 <% end %>
