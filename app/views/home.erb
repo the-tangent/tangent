@@ -1,9 +1,9 @@
 <div class="page-header">
   <h2>The Tangent</h2>
 </div>
-<% rows.each do |categories| %>
+<% categories.each_slice(3).each do |row| %>
   <div class="row">
-    <% categories.each do |category| %>
+    <% row.each do |category| %>
       <div class="col-lg-4">
         <h3><%= category.name %></h3>
         <% category.articles.take(3).each do |article| %>

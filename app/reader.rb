@@ -16,8 +16,7 @@ class Reader < Base
   get "/home" do
     flagged! do
       categories = category_service.fetch_all(:articles => article_service)
-      rows = categories.each_slice(3)
-      erb :home, :locals => { :rows => rows }
+      erb :home, :locals => { :categories => categories }
     end
   end
   
