@@ -3,7 +3,7 @@ class Editor < Base
   
   before do
     if ENV["RACK_ENV"] == "production" && request.scheme == "http"
-      redirect to("https://#{request.host}#{request.path}")
+      redirect to("https://#{ENV["HOSTNAME"]}#{request.path}")
     end
   end
   
