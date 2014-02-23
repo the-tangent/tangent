@@ -10,17 +10,12 @@ describe "An editor managing articles" do
   
   describe "on the article list page" do
     before do
-      page.driver.browser.basic_authorize("admin", "admin")
-      visit "/editor" 
-      
-      click_on "Categories"
-      click_on "New Category"
-      
-      fill_in "Name", :with => "Film"
-      click_on "Save"
+      page.driver.browser.basic_authorize("admin", "admin")   
     end
     
     it "can create an article" do  
+      create_category "Film"
+      
       click_on "Articles"
       click_on "New Article"
       
@@ -41,6 +36,8 @@ describe "An editor managing articles" do
     
     describe "clicking on an article" do
       it "sees the article rendered content" do
+        create_category "Film"
+        
         click_on "Articles"
         click_on "New Article"
       
@@ -57,11 +54,8 @@ describe "An editor managing articles" do
       end
       
       it "lets the editor edit the article" do
-        click_on "Categories"
-        click_on "New Category"
-      
-        fill_in "Name", :with => "Culture"
-        click_on "Save"
+        create_category "Film"
+        create_category "Culture"
         
         click_on "Articles"
         click_on "New Article"
