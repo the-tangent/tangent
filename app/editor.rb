@@ -1,6 +1,12 @@
 class Editor < Base
   helpers Sinatra::Nedry
   
+  before do
+    if ENV["RACK_ENV"] == "production" && request.scheme == "http"
+      redirect to("https://#{request.host}#{request.path}")
+    end
+  end
+  
   get '/editor/?' do
     protected! do
       erb :editor, :layout => :editor_layout
