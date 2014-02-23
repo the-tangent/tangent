@@ -1,16 +1,25 @@
 <div class="page-header">
+  <div class="article-controls pull-right">
+    <% if article.published? %>
+      <div class="btn-group">
+        <form accept-charset="UTF-8" action="/editor/articles/<%= article.id %>/publishing" method="post">
+          <input type="hidden" name="_method" value="delete" />
+          <button type="submit" class="btn btn-danger">Unpublish</button>
+        </form>
+      </div>
+    <% else%>
+      <div class="btn-group">
+        <form accept-charset="UTF-8" action="/editor/articles/<%= article.id %>/publishing" method="post">
+          <button type="submit" class="btn btn-success">Publish</button>
+        </form>
+      </div>
+    <% end %>
+    
+    <div class="btn-group">
+      <a href="/editor/articles/<%= article.id %>/edit" class="btn btn-default pull-right">Edit</a>
+    </div>
+  </div>
   
-  <% if article.published? %>
-  <form accept-charset="UTF-8" action="/editor/articles/<%= article.id %>/publishing" method="post">
-    <input type="hidden" name="_method" value="delete" />
-    <button type="submit" class="btn btn-danger pull-right">Unpublish</button>
-  <% else%>
-    <form accept-charset="UTF-8" action="/editor/articles/<%= article.id %>/publishing" method="post">
-      <button type="submit" class="btn btn-success pull-right">Publish</button>
-    </form>
-  <% end %>
-  
-  <a href="/editor/articles/<%= article.id %>/edit" class="btn btn-default pull-right">Edit</a>
   <h3><%= article.title %> <small><%= article.author %></small></h3>
 </div>
 
