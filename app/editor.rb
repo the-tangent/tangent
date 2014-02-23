@@ -69,12 +69,14 @@ class Editor < Base
   post "/editor/articles/:id/publishing/?" do
     protected! do
       article_service.publish(params[:id])
+      redirect to("/editor/articles/#{params[:id]}")
     end
   end
   
   delete "/editor/articles/:id/publishing/?" do
     protected! do
       article_service.unpublish(params[:id])
+      redirect to("/editor/articles/#{params[:id]}")
     end
   end
 
