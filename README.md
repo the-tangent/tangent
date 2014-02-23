@@ -4,8 +4,8 @@ tangent
 We’re going to start a newspaper. Online. Why? Because we’re bored of newspapers but we’re not bored of news.
 
 ## Setup
-1. Install [Ruby](https://www.ruby-lang.org/en/) (tangent currently uses Ruby 2.0.x)
-2. Install [SQLite](http://www.sqlite.org/)
+1. Install [Ruby](https://www.ruby-lang.org/en/) (tangent currently uses Ruby 2.0.x).
+2. Install [SQLite](http://www.sqlite.org/).
 3. Install Ruby gems:
 
   ```bash
