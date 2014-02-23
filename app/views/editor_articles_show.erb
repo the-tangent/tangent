@@ -1,23 +1,6 @@
 <div class="page-header">
   <div class="article-controls pull-right">
-    <% if article.published? %>
-      <div class="btn-group">
-        <form accept-charset="UTF-8" action="/editor/articles/<%= article.id %>/publishing" method="post">
-          <input type="hidden" name="_method" value="delete" />
-          <button type="submit" class="btn btn-danger">Unpublish</button>
-        </form>
-      </div>
-    <% else%>
-      <div class="btn-group">
-        <form accept-charset="UTF-8" action="/editor/articles/<%= article.id %>/publishing" method="post">
-          <button type="submit" class="btn btn-success">Publish</button>
-        </form>
-      </div>
-    <% end %>
-    
-    <div class="btn-group">
-      <a href="/editor/articles/<%= article.id %>/edit" class="btn btn-default pull-right">Edit</a>
-    </div>
+    <%= erb :article_controls, :locals => { :id => article.id, :published => article.published? }%>
   </div>
   
   <h3><%= article.title %> <small><%= article.author %></small></h3>
