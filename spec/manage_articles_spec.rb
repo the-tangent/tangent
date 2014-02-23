@@ -81,6 +81,35 @@ describe "An editor managing articles" do
         expect(page).to have_content("David Chen")
         expect(page).to have_content("Computer Chess")
       end
+      
+      it "lets the editor publish/unpublish an article" do
+        create_category "Film"
+        
+        click_on "Articles"
+        click_on "New Article"
+      
+        fill_in "Author", :with => "Roger Ebert"
+        fill_in "Title", :with => "Computer Chess"
+        fill_in "Content", :with => "Here is a movie by nerds, for *nerds*.\n\nAnd, about nerds."
+        select "Film", :from => "Category"
+      
+        click_on "Save"
+        click_on "Computer Chess"
+        
+        click_on "Publish"
+        
+        visit "/"
+        expect(page).to have_content("Computer Chess")
+        
+        visit "/editor"
+        click_on "Articles"
+        click_on "Computer Chess"
+        
+        click_on "Unpublish"
+        
+        visit "/"
+        expect(page).to have_no_content("Computer Chess")
+      end
     end
   end
 end

@@ -1,4 +1,15 @@
 <div class="page-header">
+  
+  <% if article.published? %>
+  <form role="form" class="pull-right" accept-charset="UTF-8" action="/editor/articles/<%= article.id %>/publishing" method="post">
+    <input type="hidden" name="_method" value="delete" />
+    <button type="submit" class="btn btn-success">Unpublish</button>
+  <% else%>
+    <form role="form" class="pull-right" accept-charset="UTF-8" action="/editor/articles/<%= article.id %>/publishing" method="post">
+      <button type="submit" class="btn btn-success">Publish</button>
+    </form>
+  <% end %>
+  
   <a href="/editor/articles/<%= article.id %>/edit" class="btn btn-default pull-right">Edit</a>
   <h3><%= article.title %> <small><%= article.author %></small></h3>
 </div>

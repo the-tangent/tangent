@@ -63,9 +63,9 @@ describe "Homepage" do
   
   def create_articles(*articles)
     page.driver.browser.basic_authorize("admin", "admin")
-    visit "/editor"
     
     articles.each do |article|
+      visit "/editor"
       click_on "Articles"
       click_on "New Article"
       
@@ -75,6 +75,8 @@ describe "Homepage" do
       select article[2], :from => "Category"
       
       click_on "Save"
+      click_on article[0]
+      click_on "Publish"
     end
     
     page.driver.browser.basic_authorize("wrong", "wrong")

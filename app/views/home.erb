@@ -6,7 +6,7 @@
     <% row.each do |category| %>
       <div class="col-lg-4">
         <h3><%= category.name %></h3>
-        <% category.articles.take(3).each do |article| %>
+        <% category.articles.select(&:published).take(3).each do |article| %>
             <h4>
               <a href="/articles/<%= article.id %>">
                 <%= article.title %>

@@ -33,5 +33,13 @@ module Persistence
         :content => content
       )
     end
+    
+    def publish(id)
+      @db[:articles].where(:id).update(:published => true)
+    end
+    
+    def unpublish(id)
+      @db[:articles].where(:id).update(:published => false)
+    end
   end
 end
