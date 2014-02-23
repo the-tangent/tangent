@@ -35,11 +35,11 @@ module Persistence
     end
     
     def publish(id)
-      @db[:articles].where(:id).update(:published => true)
+      @db[:articles].where(:id => id).update(:published => true)
     end
     
     def unpublish(id)
-      @db[:articles].where(:id).update(:published => false)
+      @db[:articles].where(:id => id).update(:published => false)
     end
   end
 end
