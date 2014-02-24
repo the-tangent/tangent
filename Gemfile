@@ -4,7 +4,7 @@ ruby "2.0.0"
 
 gem 'sinatra'
 gem 'sinatra-nedry'
-gem 'puma'
+gem 'thin'
 gem 'rake'
 
 gem 'sequel'
