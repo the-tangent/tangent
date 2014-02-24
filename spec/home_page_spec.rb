@@ -3,9 +3,6 @@ require "pry"
 
 describe "Homepage" do
   include Capybara::DSL
-  include Pharrell::Injectable
-  
-  injected :clock, System::Clock
 
   before do
     Capybara.app = Tangent.new
