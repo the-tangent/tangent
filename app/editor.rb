@@ -2,8 +2,15 @@ class Editor < Base
   helpers Sinatra::Nedry
   
   before do
-    if ENV["RACK_ENV"] == "production" && request.scheme == "http"
-      redirect to("https://#{ENV["HOSTNAME"]}#{request.path}")
+    if ENV["RACK_ENV"] == "production"
+      # Redirect to heroku/https for editor
+      if request.path.start_with?("/editor") && request.scheme == "http"
+        redirect to("https://#{ENV["HOSTNAME"]}#{request.path}")
+        
+      # Redirect to domain/http for anything else
+      elsif !request.path.start_with?("/editor") && request.scheme == "https"
+        redirect to("http://#{ENV["DOMAIN"]}#{request.path}")
+      end
     end
   end
   
