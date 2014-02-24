@@ -13,6 +13,6 @@ require "./app/editor"
 require "./app/reader"
 
 class Tangent < Sinatra::Base
-  use Reader
   use Editor
+  use Reader
 end
