@@ -1,11 +1,5 @@
 class Reader < Base
   helpers Sinatra::Nedry
-  
-  before do
-    if ENV["RACK_ENV"] == "production" && request.host != ENV["DOMAIN"]
-      redirect to("http://#{ENV["DOMAIN"]}#{request.path}")
-    end
-  end
    
   get "/" do
     if ENV["RACK_ENV"] == "production"
