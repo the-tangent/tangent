@@ -20,6 +20,7 @@ GEM
     method_source (0.8.2)
     mime-types (2.1)
     mini_portile (0.5.2)
+    newrelic_rpm (3.6.9.171)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
     pg (0.15.1)
@@ -68,6 +69,7 @@ DEPENDENCIES
   capybara
   emoji-rspec
   foreman
+  newrelic_rpm
   pg (= 0.15.1)
   pharrell
   pry

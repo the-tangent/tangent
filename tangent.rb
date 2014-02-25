@@ -13,6 +13,10 @@ require "./app/editor"
 require "./app/reader"
 
 class Tangent < Sinatra::Base
+  configure :production do
+    require 'newrelic_rpm'
+  end
+  
   use Editor
   use Reader
 end

@@ -6,6 +6,7 @@ gem 'sinatra'
 gem 'sinatra-nedry'
 gem 'thin'
 gem 'rake'
+gem 'newrelic_rpm'
 
 gem 'sequel'
 gem 'pg', "0.15.1"
