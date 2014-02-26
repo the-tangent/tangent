@@ -9,6 +9,10 @@ class Reader < Base
     end
   end
   
+  get "/ping" do
+    "pong"
+  end
+  
   get "/manifesto" do
     erb :manifesto
   end
@@ -18,10 +22,6 @@ class Reader < Base
       categories = category_service.fetch_all(:articles => article_service)
       erb :home, :locals => { :categories => categories }
     end
-  end
-  
-  get "/ping" do
-    "pong"
   end
   
   get "/articles/:id/?" do
