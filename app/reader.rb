@@ -20,6 +20,10 @@ class Reader < Base
     end
   end
   
+  get "/ping" do
+    "pong"
+  end
+  
   get "/articles/:id/?" do
     flagged! do
       article = article_service.fetch(params[:id])
