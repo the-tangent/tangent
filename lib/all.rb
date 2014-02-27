@@ -5,3 +5,4 @@ require_relative "persistence/database"
 
 require_relative "widget/article"
 require_relative "widget/tile"
+require_relative "widget/comments"

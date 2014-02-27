@@ -5,3 +5,5 @@
 <div>
   <%= article.content %>
 </div>
+
+<%= erb :comments, :locals => { :comments => comments } %>

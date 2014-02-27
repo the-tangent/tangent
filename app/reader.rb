@@ -31,11 +31,16 @@ class Reader < Base
   get "/articles/:id/?" do
     flagged! do
       categories = category_service.fetch_all
-
       article = article_service.fetch(params[:id])
-      widget = Widget::Article.new(article)
 
-      erb :articles_show, :locals => { :article => widget, :categories => categories }
+      article_widget = Widget::Article.new(article)
+      comments = Widget::Comments.new(ENV["RACK_ENV"])
+
+      erb :articles_show, :locals => {
+        :categories => categories,
+        :article => article_widget,
+        :comments => comments
+      }
     end
   end
 end

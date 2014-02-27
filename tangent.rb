@@ -16,7 +16,6 @@ require "./app/reader"
 class Tangent < Sinatra::Base
   use Monitoring
   use Editor
-
   use Manifesto if ENV["RACK_ENV"] == "production"
   use Reader
 end

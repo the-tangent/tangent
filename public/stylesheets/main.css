@@ -20,6 +20,10 @@ body {
   color: black;
 }
 
+.comments {
+  margin-top: 40px
+}
+
 @media (min-width: 768px) {
   .manifesto {
     text-align: justify;
