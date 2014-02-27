@@ -11,7 +11,12 @@ body {
 }
 
 .categories {
-  margin-bottom: 30px;
+  background-color: #d3d3d3;
+  margin-bottom: 20px;
+}
+
+.categories .category {
+  color: black;
 }
 
 /* Manifesto */
