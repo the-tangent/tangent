@@ -10,7 +10,7 @@ class Reader < Base
   end
 
   get "/manifesto" do
-    erb :manifesto
+    erb :manifesto, :layout => nil
   end
 
   get "/home" do
