@@ -2,9 +2,7 @@ require_relative "../lib/persistence/database"
 require_relative "../lib/persistence/article_service"
 
 describe Persistence::ArticleService do
-  include Pharrell::Injectable
-
-  injected :service, Persistence::ArticleService
+  let(:service) { Persistence::ArticleService.new(DB) }
 
   describe "#publish" do
     it "publishes the article the passed id" do
