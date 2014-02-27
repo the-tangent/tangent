@@ -6,7 +6,7 @@ module Widget
       @id = article.id
       @title = article.title
       @author = article.author
-      @content = article.content
+      @content = article.content || ""
       @published = article.published
     end
     
