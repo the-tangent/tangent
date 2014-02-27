@@ -1,14 +1,16 @@
 require_relative "../lib/persistence/database"
 require_relative "../lib/persistence/article_service"
 
-RSpec.configure do |config|
-  config.around(:each) do |example|
-    DB.transaction(:rollback=>:always){example.run}
-  end
-end
-
 describe Persistence::ArticleService do
   let(:db) { Persistence::Database.new(ENV["RACK_ENV"], ENV["DATABASE_URL"]).connect }
+  
+  before do
+    RSpec.configure do |config|
+      config.around(:each) do |example|
+        db.transaction(:rollback=>:always){example.run}
+      end
+    end
+  end
   
   describe "#publish" do
     it "publishes the article the passed id" do

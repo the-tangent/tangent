@@ -8,31 +8,27 @@ describe "Homepage" do
     Capybara.app = Tangent.new
   end
 
-  it "lists the categories with articles" do
-    create_categories("Culture", "Comment", "Sports")
+  it "lists articles with summaries" do
     create_articles(
-      ["Computer Chess", "Roger Ebert", "Culture"],
-      ["Dylan Farrow Is Already Too Old", "Heather Long", "Comment"]
+      ["Computer Chess", "Roger Ebert", "A good film\n\nAnother thing"],
+      ["Dylan Farrow Is Already Too Old", "Heather Long", "Oh my god Woody Allen\n\nAnother thing"]
     )
     
     visit '/'
-    expect(page).to have_content("Culture")
-    expect(page).to have_content("Comment")
     
     expect(page).to have_content("Computer Chess")
-    expect(page).to have_content("Roger Ebert")
+    expect(page).to have_content("A good film")
     
     expect(page).to have_content("Dylan Farrow Is Already Too Old")
-    expect(page).to have_content("Heather Long")
+    expect(page).to have_content("Oh my god Woody Allen")
     
-    expect(page).to have_no_content("Sports")
+    expect(page).to have_no_content("Another thing")
   end
   
   describe "clicking on an article" do
     it "shows the article's content" do
-      create_categories("Culture")
       create_articles(
-        ["Computer Chess", "Roger Ebert", "Culture", "The *best*:\n\nMovie."],
+        ["Computer Chess", "Roger Ebert", "The *best*:\n\nMovie."],
       )
       
       visit '/'
@@ -68,8 +64,7 @@ describe "Homepage" do
       
       fill_in "Title", :with => article[0]
       fill_in "Author", :with => article[1] 
-      fill_in "Content", :with => article[3]
-      select article[2], :from => "Category"
+      fill_in "Content", :with => article[2]
       
       click_on "Save"
       click_on article[0]

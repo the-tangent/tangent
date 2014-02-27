@@ -15,8 +15,9 @@ class Reader < Base
   
   get "/home" do
     flagged! do
-      categories = category_service.fetch_all(:articles => article_service)
-      erb :home, :locals => { :categories => categories }
+      articles = article_service.fetch_all.select { |a| a.published }
+      tiles = articles.map { |a| Widget::Tile.new(a) }
+      erb :home, :locals => { :articles => tiles }
     end
   end
   
