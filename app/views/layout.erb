@@ -18,7 +18,7 @@
       </div>
 
       <div class="row categories">
-        <% categories.each do |category| %>
+        <% categories.take(6).each do |category| %>
           <div class="col-sm-2">
             <a href="/categories/<%= category.id %>">
               <h5 class="category"><%= category.name %></h5>
