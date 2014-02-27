@@ -8,6 +8,18 @@ body {
   font-weight: 300;
 }
 
+.logo {
+  color: black;
+}
+
+.categories {
+  margin-bottom: 30px;
+}
+
+.tile .title {
+  color: black;
+}
+
 @media (min-width: 768px) {
   .manifesto {
     text-align: justify;

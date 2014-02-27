@@ -39,6 +39,21 @@ describe "Homepage" do
     end
   end
   
+  describe "clicking on a category" do
+    it "shows articles for that category" do
+      create_categories("Film", "Other")
+      create_articles(
+        ["Other Category Article", "Some Person", "", "Other"],
+        ["Computer Chess", "Roger Ebert", "The *best*:\n\nMovie.", "Film"],
+      )
+      
+      visit '/'
+      click_on "Film"
+      expect(page).to have_content("Computer Chess")
+      expect(page).to have_no_content("Other Category Article")
+    end
+  end
+  
   def create_categories(*categories)
     page.driver.browser.basic_authorize("admin", "admin")
     visit "/editor"
@@ -65,6 +80,7 @@ describe "Homepage" do
       fill_in "Title", :with => article[0]
       fill_in "Author", :with => article[1] 
       fill_in "Content", :with => article[2]
+      select article[3], :from => "Category" if article[3]
       
       click_on "Save"
       click_on article[0]

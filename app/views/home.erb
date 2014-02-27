@@ -1,17 +1,28 @@
 <div class="page-header">
-  <h2>The Tangent</h2>
+  <a href="/"><h2 class="logo">The Tangent</h2></a>
 </div>
+
+<div class="row categories">
+  <% categories.each do |category| %>
+    <div class="col-lg-2">
+      <a href="/categories/<%= category.id %>"><%= category.name %></a>
+    </div>
+  <% end %>
+</div>
+
 <% articles.each_slice(3).each do |row| %>
   <div class="row">
     <% row.each do |article| %>
       <div class="col-lg-4">
-        <h3>
-          <a href="/articles/<%= article.id %>">
-            <%= article.title %>
-          </a>
-        </h3>
-        <div>
-          <%= article.summary %>
+        <div class="tile">
+          <h4>
+            <a href="/articles/<%= article.id %>" class="title">
+              <%= article.title %>
+            </a>
+          </h4>
+          <div>
+            <%= article.summary %>
+          </div>
         </div>
       </div>
     <% end %>
