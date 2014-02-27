@@ -1,12 +1,10 @@
+/* Default element styles*/
+
 body {
   padding-bottom: 24px;
 }
 
-.manifesto {
-  margin-top: 32px;
-  font-size: 20px;
-  font-weight: 300;
-}
+/* Nav bar */
 
 .logo {
   color: black;
@@ -16,9 +14,21 @@ body {
   margin-bottom: 30px;
 }
 
+/* Manifesto */
+
+.manifesto {
+  margin-top: 32px;
+  font-size: 20px;
+  font-weight: 300;
+}
+
+/* Article tile */
+
 .tile .title {
   color: black;
 }
+
+/* Article show */
 
 .article .content {
   text-align: justify;
@@ -27,6 +37,8 @@ body {
 .comments {
   margin-top: 40px
 }
+
+/* Responsive */
 
 @media (min-width: 768px) {
   .manifesto {
