@@ -2,15 +2,7 @@ class Reader < Base
   helpers Sinatra::Nedry
 
   get "/" do
-    if ENV["RACK_ENV"] == "production"
-      redirect to("/manifesto")
-    else
-      redirect to("/home")
-    end
-  end
-
-  get "/manifesto" do
-    erb :manifesto, :layout => nil
+    redirect to("/home")
   end
 
   get "/home" do
