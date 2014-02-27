@@ -1,21 +1,26 @@
-module Persistence  
+module Persistence
   class ArticleService
-    def initialize(db)
+    def initialize(db, published: false)
       @db = db
+      @published = published
     end
-  
+
+    def published
+      self.class.new(@db, :published => true)
+    end
+
     def fetch(id)
-      Model.new(@db[:articles].where(:id => id).first)
+      Model.new(dataset.where(:id => id).first)
     end
-  
+
     def fetch_all
-      @db[:articles].all.map { |hash| Model.new(hash) }
+      dataset.all.map { |hash| Model.new(hash) }
     end
-  
+
     def fetch_all_from_category(id)
-      @db[:articles].where(:category_id => id).all.map { |hash| Model.new(hash) }
+      dataset.where(:category_id => id).all.map { |hash| Model.new(hash) }
     end
-  
+
     def create(author, title, category, content)
       @db[:articles].insert(
         :author => author,
@@ -24,7 +29,7 @@ module Persistence
         :content => content
       )
     end
-  
+
     def update(id, author, title, category, content)
       @db[:articles].where(:id => id).update(
         :author => author,
@@ -33,13 +38,23 @@ module Persistence
         :content => content
       )
     end
-    
+
     def publish(id)
       @db[:articles].where(:id => id).update(:published => true)
     end
-    
+
     def unpublish(id)
       @db[:articles].where(:id => id).update(:published => false)
+    end
+
+    private
+
+    def dataset
+      if @published
+        @db[:articles].where(:published => true)
+      else
+        @db[:articles]
+      end
     end
   end
 end

@@ -1,7 +1,7 @@
 require "spec_helper"
 require "pry"
 
-describe "Homepage" do
+describe "Article page" do
   include Capybara::DSL
   include Pharrell::Injectable
 
@@ -18,6 +18,8 @@ describe "Homepage" do
       nil,
       "The *best*:\n\nMovie."
     )
+
+    article_service.publish(article_id)
 
     visit "/articles/#{article_id}"
 

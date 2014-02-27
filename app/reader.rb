@@ -9,7 +9,7 @@ class Reader < Base
     flagged! do
       categories = category_service.fetch_all
 
-      articles = article_service.fetch_all.select { |a| a.published }
+      articles = article_service.published.fetch_all
       tiles = articles.map { |a| Widget::Tile.new(a) }
 
       erb :articles, :locals => { :categories => categories, :articles => tiles }
@@ -20,9 +20,8 @@ class Reader < Base
     flagged! do
       categories = category_service.fetch_all
 
-      articles = article_service.fetch_all_from_category(params[:id])
-      published_articles = articles.select { |a| a.published }
-      tiles = published_articles.map { |a| Widget::Tile.new(a) }
+      articles = article_service.published.fetch_all_from_category(params[:id])
+      tiles = articles.map { |a| Widget::Tile.new(a) }
 
       erb :articles, :locals => { :categories => categories, :articles => tiles }
     end
@@ -31,7 +30,7 @@ class Reader < Base
   get "/articles/:id/?" do
     flagged! do
       categories = category_service.fetch_all
-      article = article_service.fetch(params[:id])
+      article = article_service.published.fetch(params[:id])
 
       article_widget = Widget::Article.new(article)
       comments = Widget::Comments.new(ENV["RACK_ENV"])
