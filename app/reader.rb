@@ -9,10 +9,6 @@ class Reader < Base
     end
   end
   
-  get "/ping" do
-    "pong"
-  end
-  
   get "/manifesto" do
     erb :manifesto
   end

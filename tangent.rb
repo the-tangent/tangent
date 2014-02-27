@@ -8,15 +8,13 @@ require "pharrell"
 require "./lib/all"
 require "./config"
 
+require "./app/monitoring"
 require "./app/base"
 require "./app/editor"
 require "./app/reader"
 
-class Tangent < Sinatra::Base
-  configure :production do
-    require 'newrelic_rpm'
-  end
-  
+class Tangent < Sinatra::Base  
+  use Monitoring
   use Editor
   use Reader
 end
