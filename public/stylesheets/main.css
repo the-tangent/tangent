@@ -28,6 +28,10 @@ body {
   color: black;
 }
 
+.tile .summary {
+  text-align: justify;
+}
+
 /* Article show */
 
 .article .content {
