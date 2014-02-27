@@ -20,6 +20,10 @@ body {
   color: black;
 }
 
+.article .content {
+  text-align: justify;
+}
+
 .comments {
   margin-top: 40px
 }
