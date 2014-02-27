@@ -11,6 +11,7 @@ require "./config"
 require "./app/monitoring"
 require "./app/base"
 require "./app/editor"
+require "./app/manifesto"
 require "./app/reader"
 
 class Tangent < Sinatra::Base
