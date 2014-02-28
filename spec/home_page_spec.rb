@@ -5,7 +5,6 @@ describe "Homepage" do
   include Pharrell::Injectable
 
   injected :article_service, Persistence::ArticleService
-  injected :category_service, Persistence::CategoryService
 
   before do
     Capybara.app = Tangent.new
@@ -15,14 +14,14 @@ describe "Homepage" do
     article_service.publish(article_service.create(
       "Roger Ebert",
       "Computer Chess",
-      nil,
+      Categories::FILM.id,
       "A good film\r\n\r\nAnother thing"
     ))
 
     article_service.publish(article_service.create(
       "Heather Long",
       "Dylan Farrow Is Already Too Old",
-      nil,
+      Categories::FILM.id,
       "Oh my god Woody Allen\r\n\r\nAnother thing"
     ))
 
@@ -37,12 +36,22 @@ describe "Homepage" do
     expect(page).to have_no_content("Another thing")
   end
 
+  it "links to the categories" do
+    visit "/"
+    expect(page).to have_link("Here & Now")
+    expect(page).to have_link("Life")
+    expect(page).to have_link("Art")
+    expect(page).to have_link("Film")
+    expect(page).to have_link("Theatre")
+    expect(page).to have_link("Science")
+  end
+
   describe "clicking on an article" do
     it "shows the article's content" do
       article_service.publish(article_service.create(
         "Roger Ebert",
         "Computer Chess",
-        nil,
+        Categories::FILM.id,
         "The *best*:\n\nMovie."
       ))
 
@@ -59,14 +68,14 @@ describe "Homepage" do
       article_service.publish(article_service.create(
         "Roger Ebert",
         "Computer Chess",
-        category_service.create("Film"),
+        Categories::FILM.id,
         "some content"
       ))
 
       article_service.publish(article_service.create(
         "Heather Long",
         "Other Category Article",
-        category_service.create("Other"),
+        Categories::LIFE.id,
         "some content"
       ))
 
