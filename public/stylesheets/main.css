@@ -15,6 +15,17 @@ body {
   margin-bottom: 20px;
 }
 
+/* Footer */
+
+.footer {
+  margin-top: 20px;
+  border-top: 1px solid black;
+}
+
+.footer h5 {
+  color: black;
+}
+
 .categories .category {
   color: black;
 }
