@@ -1,5 +1,4 @@
 require "spec_helper"
-require "pry"
 
 describe "Article page" do
   include Capybara::DSL
@@ -19,12 +18,14 @@ describe "Article page" do
       "The *best*:\n\nMovie."
     )
 
-    article_service.publish(article_id, Time.now)
+    time = Time.parse("4 February 2014")
+    article_service.publish(article_id, time)
 
     visit "/articles/#{article_id}"
 
     expect(page).to have_content("Computer Chess")
     expect(page).to have_content("Roger Ebert")
+    expect(page).to have_content("4 February 2014")
 
     expect(page.html).to include("<p>The <em>best</em>:</p>")
     expect(page.html).to include("<p>Movie.</p>")
