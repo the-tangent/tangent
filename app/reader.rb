@@ -14,6 +14,10 @@ class Reader < Base
     end
   end
 
+  get "/about/?" do
+    erb :about,:locals => { :categories => Categories::ALL }
+  end
+
   get "/categories/:id/?" do
     flagged! do
       articles = article_service.published.fetch_all_from_category(params[:id])
