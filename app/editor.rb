@@ -79,14 +79,13 @@ class Editor < Base
 
   post "/editor/articles/:id/publishing/?" do
     protected! do
-      article = article_service.fetch(params[:id])
+      publisher = Domain::ArticlePublisher.new(params[:id], article_service)
+      article = publisher.publish
 
-      if article_ok?(article)
-        article_service.publish(params[:id], Time.now)
-        redirect to("/editor/articles/#{params[:id]}")
-      else
-        article.set(:error, "Article is not finished! Can't publish it yet.")
+      if article.error
         erb :editor_articles_edit, :locals => { :article => article, :categories => Categories::ALL }, :layout => :editor_layout
+      else
+        redirect to("/editor/articles/#{params[:id]}")
       end
     end
   end
@@ -110,16 +109,5 @@ class Editor < Base
       articles = article_service.fetch_all_from_category(category.id)
       erb :editor_categories_show, :locals => { :category => category, :articles => articles }, :layout => :editor_layout
     end
-  end
-
-  private
-
-  def article_ok?(article)
-    [
-      article.title && article.title.length > 0,
-      article.author && article.author.length > 0,
-      article.category_id && Categories::ALL.map(&:id).include?(article.category_id),
-      article.content && article.content.length > 0
-    ].all?
   end
 end

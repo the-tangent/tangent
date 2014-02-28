@@ -6,6 +6,7 @@ module Persistence
 
     def set(key, value)
       @hash[key] = value
+      self
     end
 
     def method_missing(meth, *args, &block)
