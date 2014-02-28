@@ -39,19 +39,19 @@ module Persistence
       )
     end
 
-    def publish(id)
-      @db[:articles].where(:id => id).update(:published => true)
+    def publish(id, time)
+      @db[:articles].where(:id => id).update(:published => time)
     end
 
     def unpublish(id)
-      @db[:articles].where(:id => id).update(:published => false)
+      @db[:articles].where(:id => id).update(:published => nil)
     end
 
     private
 
     def dataset
       if @published
-        @db[:articles].where(:published => true)
+        @db[:articles].where("published IS NOT NULL")
       else
         @db[:articles]
       end

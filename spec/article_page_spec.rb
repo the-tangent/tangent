@@ -19,7 +19,7 @@ describe "Article page" do
       "The *best*:\n\nMovie."
     )
 
-    article_service.publish(article_id)
+    article_service.publish(article_id, Time.now)
 
     visit "/articles/#{article_id}"
 

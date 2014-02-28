@@ -79,7 +79,7 @@ class Editor < Base
 
   post "/editor/articles/:id/publishing/?" do
     protected! do
-      article_service.publish(params[:id])
+      article_service.publish(params[:id], Time.now)
       redirect to("/editor/articles/#{params[:id]}")
     end
   end
