@@ -14,11 +14,11 @@ module Persistence
     end
 
     def fetch_all
-      dataset.all.map { |hash| Model.new(hash) }
+      dataset.reverse_order(:published).all.map { |hash| Model.new(hash) }
     end
 
     def fetch_all_from_category(id)
-      dataset.where(:category_id => id).all.map { |hash| Model.new(hash) }
+      dataset.reverse_order(:published).where(:category_id => id).all.map { |hash| Model.new(hash) }
     end
 
     def create(author, title, category, content)
