@@ -2,11 +2,14 @@
 
 body {
   padding-bottom: 24px;
+  font-family: sans-serif;
 }
 
 /* Nav bar */
 
 .logo {
+  font-family: 'Six Caps', sans-serif;
+  font-size: 50px;
   color: black;
 }
 
