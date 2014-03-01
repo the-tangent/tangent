@@ -29,7 +29,7 @@ class Reader < Base
 
   get "/articles/:id/?" do
     flagged! do
-      article = article_service.published.fetch(params[:id])
+      article = article_service.published.fetch(params[:id].to_i)
 
       if article
         article_widget = Widget::Article.new(article)

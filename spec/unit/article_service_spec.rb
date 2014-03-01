@@ -5,6 +5,12 @@ describe Persistence::ArticleService do
   let(:db) { Pharrell.instance_for(Persistence::Database) }
   let(:service) { Persistence::ArticleService.new(db) }
 
+  describe "#fetch" do
+    it "returns nil if the id does not exist" do
+      expect(service.fetch(0)).to eq(nil)
+    end
+  end
+
   describe "#fetch_all" do
     it "returns results in reverse date order" do
       ids = service.create("", "", nil, ""), service.create("", "", nil, ""), service.create("", "", nil, "")
