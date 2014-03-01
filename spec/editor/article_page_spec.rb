@@ -1,0 +1,59 @@
+require "spec_helper"
+
+describe "The editor's article show page" do
+  include Capybara::DSL
+
+  include Pharrell::Injectable
+  injected :article_service, Persistence::ArticleService
+
+  before do
+    Capybara.app = Tangent.new
+    page.driver.browser.basic_authorize("admin", "admin")
+  end
+
+  it "lets the editor publish/unpublish an article" do
+    article_service.create(
+      "Roger Ebert",
+      "Computer Chess",
+      Categories::FILM.id,
+      "Here's a movie by nerds, for nerds, and about nerds."
+    )
+
+    visit "/editor"
+    click_on "Articles"
+    click_on "Computer Chess"
+
+    click_on "Publish"
+
+    visit "/"
+    expect(page).to have_content("Computer Chess")
+
+    visit "/editor"
+    click_on "Articles"
+    click_on "Computer Chess"
+
+    click_on "Unpublish"
+
+    visit "/"
+    expect(page).to have_no_content("Computer Chess")
+  end
+
+  it "shows an error if an unfinished article is published" do
+    article_service.create(
+      "",
+      "Computer Chess",
+      Categories::FILM.id,
+      "Here's a movie by nerds, for nerds, and about nerds."
+    )
+
+    visit "/editor"
+    click_on "Articles"
+    click_on "Computer Chess"
+
+    click_on "Publish"
+    expect(page).to have_content("not finished")
+
+    visit "/"
+    expect(page).to have_no_content("Computer Chess")
+  end
+end
