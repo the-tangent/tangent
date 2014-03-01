@@ -2,7 +2,8 @@ require_relative "../lib/persistence/database"
 require_relative "../lib/persistence/article_service"
 
 describe Persistence::ArticleService do
-  let(:service) { Persistence::ArticleService.new(DB) }
+  let(:db) { Pharrell.instance_for(Persistence::Database) }
+  let(:service) { Persistence::ArticleService.new(db) }
 
   describe "#fetch_all" do
     it "returns results in reverse date order" do

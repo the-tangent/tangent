@@ -1,5 +1,9 @@
 module Persistence
   class ArticleService
+    include Pharrell::Constructor
+
+    constructor Persistence::Database
+
     def initialize(db, published: false)
       @db = db
       @published = published

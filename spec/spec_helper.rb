@@ -13,6 +13,6 @@ Pharrell.use_config(:test)
 
 RSpec.configure do |config|
   config.around(:each) do |example|
-    DB.transaction(:rollback=>:always){example.run}
+    Pharrell.instance_for(Persistence::Database).transaction(:rollback=>:always){example.run}
   end
 end
