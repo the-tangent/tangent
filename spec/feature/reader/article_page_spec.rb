@@ -21,7 +21,8 @@ describe "Article page" do
     time = Time.parse("4 February 2014")
     article_service.publish(article_id, time)
 
-    visit "/articles/#{article_id}"
+    visit "/"
+    click_on "Computer Chess"
 
     expect(page).to have_content("Computer Chess")
     expect(page).to have_content("Roger Ebert")

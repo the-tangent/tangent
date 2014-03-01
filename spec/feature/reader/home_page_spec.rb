@@ -46,23 +46,6 @@ describe "Homepage" do
     expect(page).to have_link("Science")
   end
 
-  describe "clicking on an article" do
-    it "shows the article's content" do
-      article_service.publish(article_service.create(
-        "Roger Ebert",
-        "Computer Chess",
-        Categories::FILM.id,
-        "The *best*:\n\nMovie."
-      ), Time.at(0))
-
-      visit '/'
-      click_on "Computer Chess"
-
-      expect(page.html).to include("<p>The <em>best</em>:</p>")
-      expect(page.html).to include("<p>Movie.</p>")
-    end
-  end
-
   describe "clicking on a category" do
     it "shows articles for that category" do
       article_service.publish(article_service.create(

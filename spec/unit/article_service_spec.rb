@@ -1,5 +1,5 @@
-require_relative "../lib/persistence/database"
-require_relative "../lib/persistence/article_service"
+require_relative "../../lib/persistence/database"
+require_relative "../../lib/persistence/article_service"
 
 describe Persistence::ArticleService do
   let(:db) { Pharrell.instance_for(Persistence::Database) }
