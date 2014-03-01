@@ -31,14 +31,18 @@ class Reader < Base
     flagged! do
       article = article_service.published.fetch(params[:id])
 
-      article_widget = Widget::Article.new(article)
-      comments = Widget::Comments.new(ENV["RACK_ENV"])
+      if article
+        article_widget = Widget::Article.new(article)
+        comments = Widget::Comments.new(ENV["RACK_ENV"])
 
-      erb :articles_show, :locals => {
-        :categories => Categories::ALL,
-        :article => article_widget,
-        :comments => comments
-      }
+        erb :articles_show, :locals => {
+          :categories => Categories::ALL,
+          :article => article_widget,
+          :comments => comments
+        }
+      else
+        raise Sinatra::NotFound
+      end
     end
   end
 end

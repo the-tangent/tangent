@@ -14,7 +14,13 @@ module Persistence
     end
 
     def fetch(id)
-      Model.new(dataset.where(:id => id).first)
+      row = dataset.where(:id => id).first
+
+      if row
+        Model.new(row)
+      else
+        nil
+      end
     end
 
     def fetch_all
