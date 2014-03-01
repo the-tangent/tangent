@@ -12,7 +12,17 @@ describe "The editor's article list page" do
   end
 
   it "lists the articles" do
-    pending
+    article_service.create("Richard Riddick", "Surviving Crematoria", nil, nil)
+    article_service.create("John Rambo", "Killing Folk", nil, nil)
+
+    visit "/editor"
+    click_on "Articles"
+
+    expect(page).to have_content("Surviving Crematoria")
+    expect(page).to have_content("Richard Riddick")
+
+    expect(page).to have_content("Killing Folk")
+    expect(page).to have_content("John Rambo")
   end
 
   it "lets the editor create an article" do

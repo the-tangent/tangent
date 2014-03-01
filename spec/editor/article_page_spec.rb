@@ -12,7 +12,21 @@ describe "The editor's article show page" do
   end
 
   it "shows the rendered article" do
-    pending
+    article_service.create(
+      "Roger Ebert",
+      "Computer Chess",
+      Categories::FILM.id,
+      "Heres a movie by nerds,\r\n\r\nFor nerds, and about nerds."
+    )
+
+    visit "/editor"
+    click_on "Articles"
+    click_on "Computer Chess"
+
+    expect(page).to have_content("Computer Chess")
+    expect(page).to have_content("Roger Ebert")
+    expect(page.html).to include("<p>Heres a movie by nerds,</p>")
+    expect(page.html).to include("<p>For nerds, and about nerds.</p>")
   end
 
   it "lets the editor publish/unpublish an article" do
