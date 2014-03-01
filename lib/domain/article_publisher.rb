@@ -5,11 +5,11 @@ module Domain
       @service = service
     end
 
-    def publish
+    def publish(time)
       article = @service.fetch(@article_id)
 
       if article_ok?(article)
-        @service.publish(@article_id, Time.now)
+        @service.publish(@article_id, time)
         article
       else
         article.set(:error, "Article is not finished! Can't publish it yet.")

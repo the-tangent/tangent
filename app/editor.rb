@@ -1,6 +1,9 @@
 class Editor < Base
   helpers Sinatra::Nedry
 
+  include Pharrell::Injectable
+  injected :clock, System::Clock
+
   before do
     if ENV["RACK_ENV"] == "production"
       # Redirect to heroku/https for editor
@@ -80,7 +83,7 @@ class Editor < Base
   post "/editor/articles/:id/publishing/?" do
     protected! do
       publisher = Domain::ArticlePublisher.new(params[:id], article_service)
-      article = publisher.publish
+      article = publisher.publish(clock.now)
 
       if article.error
         erb :editor_articles_edit, :locals => { :article => article, :categories => Categories::ALL }, :layout => :editor_layout

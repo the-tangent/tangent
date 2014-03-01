@@ -30,7 +30,7 @@ describe Persistence::ArticleService do
     it "publishes the article the passed id" do
       ids = service.create("", "", nil, ""), service.create("", "", nil, "")
 
-      time = Time.now
+      time = Time.at(0)
       service.publish(ids[0], time)
 
       expect(service.fetch(ids[0]).published).to eq(time)
@@ -42,7 +42,7 @@ describe Persistence::ArticleService do
     it "unpublishes the article the passed id" do
       ids = service.create("", "", nil, ""), service.create("", "", nil, "")
 
-      time = Time.now
+      time = Time.at(0)
       service.publish(ids[0], time)
       service.publish(ids[1], time)
 

@@ -16,14 +16,14 @@ describe "Homepage" do
       "Computer Chess",
       Categories::FILM.id,
       "A good film\r\n\r\nAnother thing"
-    ), Time.now)
+    ), Time.at(0))
 
     article_service.publish(article_service.create(
       "Heather Long",
       "Dylan Farrow Is Already Too Old",
       Categories::FILM.id,
       "Oh my god Woody Allen\r\n\r\nAnother thing"
-    ), Time.now)
+    ), Time.at(0))
 
     visit '/'
 
@@ -53,7 +53,7 @@ describe "Homepage" do
         "Computer Chess",
         Categories::FILM.id,
         "The *best*:\n\nMovie."
-      ), Time.now)
+      ), Time.at(0))
 
       visit '/'
       click_on "Computer Chess"
@@ -70,14 +70,14 @@ describe "Homepage" do
         "Computer Chess",
         Categories::FILM.id,
         "some content"
-      ), Time.now)
+      ), Time.at(0))
 
       article_service.publish(article_service.create(
         "Heather Long",
         "Other Category Article",
         Categories::LIFE.id,
         "some content"
-      ), Time.now)
+      ), Time.at(0))
 
       visit '/'
       click_on "Film"
