@@ -4,7 +4,9 @@ Sequel.migration do
       primary_key :id
       String :author
       String :title
+      String :category_id
       String :content, :text => true
+      Time :published
     end
   end
 
@@ -12,4 +14,3 @@ Sequel.migration do
     drop_table(:articles)
   end
 end
-
