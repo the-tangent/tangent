@@ -11,6 +11,10 @@ describe "The editor's article list page" do
     page.driver.browser.basic_authorize("admin", "admin")
   end
 
+  it "lists the articles" do
+    pending
+  end
+
   it "lets the editor create an article" do
     visit "/editor"
     click_on "Articles"

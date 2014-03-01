@@ -11,6 +11,10 @@ describe "The editor's article show page" do
     page.driver.browser.basic_authorize("admin", "admin")
   end
 
+  it "shows the rendered article" do
+    pending
+  end
+
   it "lets the editor publish/unpublish an article" do
     article_service.create(
       "Roger Ebert",
