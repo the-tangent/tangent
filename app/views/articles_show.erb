@@ -4,9 +4,11 @@
     <h4><%= article.author %> <small><%= article.date %></small></h4>
   </div>
 
-  <% if article.image_url %>
-    <img src="<%= article.image_url %>">
-  <% end %>
+  <div class="image"
+    <% if article.image_url %>
+      <img src="<%= article.image_url %>">
+    <% end %>
+  </div>
 
   <div class="content">
     <%= article.content %>
