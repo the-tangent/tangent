@@ -1,0 +1,8 @@
+language: ruby
+rvm:
+- 2.0.0
+deploy:
+  provider: heroku
+  api_key:
+    secure: TFo6TD+dFgU6ZEol/rcsO89BUUtijj8Q1MRtoTi+tpNlBy1LKnfxHxcgfsgAOuA34NH83sE6LDsTHerA6mxvR272neCgqAEvU/gWR+tdKaddiViRg0YRV5CGk2KURLP3FfzvAhDT0L+T71ny5ZcEOsgdYR2ZjKLE7n5p/xv+za0=
+  app: the-tangent
