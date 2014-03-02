@@ -15,7 +15,7 @@ We’re going to start a newspaper. Online. Why? Because we’re bored of newspa
   bundle
   ```
 
-4. Initialize and create the database:
+4. Initialize and create the databases:
 
   ```bash
   bundle exec rake db:migrate
