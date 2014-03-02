@@ -3,7 +3,7 @@ class Editor < Base
 
   include Pharrell::Injectable
   injected :clock, System::Clock
-  injected :storage, Fog::Storage::AWS::Directory
+  injected :article_image_service, Persistence::ArticleImageService
 
   before do
     if ENV["RACK_ENV"] == "production"
@@ -65,8 +65,7 @@ class Editor < Base
       )
 
       image_url = if article_params[:image]
-        uploader = Persistence::ArticleImageService.new(storage)
-        uploader.upload(article_id, article_params[:image])
+        article_image_service.upload(article_id, article_params[:image])
       else
         nil
       end
@@ -88,8 +87,7 @@ class Editor < Base
       article_params = params[:article]
 
       image_url = if article_params[:image]
-        uploader = Persistence::ArticleImageService.new(storage)
-        uploader.upload(params[:id], article_params[:image])
+        article_image_service.upload(params[:id], article_params[:image])
       else
         nil
       end

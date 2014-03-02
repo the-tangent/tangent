@@ -25,6 +25,7 @@ Pharrell.config(:base) do |config|
 
   directory = FOG.directories.select { |d| d.key == "the-tangent" }.first
   config.bind(Fog::Storage::AWS::Directory, directory)
+  config.bind(Persistence::ArticleImageService, Persistence::ArticleImageService.new(directory))
 end
 
 Pharrell.config(:test, :extends => :base) do |config|
