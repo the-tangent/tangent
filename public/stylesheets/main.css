@@ -18,6 +18,18 @@ body {
   margin-bottom: 20px;
 }
 
+.category a {
+  color: black;
+}
+
+@media (min-width: 768px) {
+  .category {
+    text-align: center;
+    border-left: 1px solid white;
+    border-right: 1px solid white;
+  }
+}
+
 /* Footer */
 
 .footer {
@@ -25,7 +37,7 @@ body {
   border-top: 1px solid black;
 }
 
-.footer h5 {
+.footer .footer-links a {
   color: black;
 }
 
