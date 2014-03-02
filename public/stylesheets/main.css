@@ -73,10 +73,20 @@ body {
   margin-top: 40px
 }
 
-/* Responsive */
+/* General responsive */
 
 @media (min-width: 768px) {
   .manifesto {
     text-align: justify;
+  }
+
+  .mobile-only {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .pull-right {
+    display: none;
   }
 }
