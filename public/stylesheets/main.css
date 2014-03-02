@@ -1,6 +1,7 @@
 /* Default element styles*/
 
 body {
+  background-image: url('/images/background.png');
   padding-bottom: 24px;
   font-family: sans-serif;
 }
