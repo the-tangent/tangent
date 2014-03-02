@@ -37,25 +37,6 @@ describe "The editor's article edit page" do
     expect(page).to have_content("Computer Chess")
   end
 
-  it "lets the editor upload an image for the article" do
-    article_service.create(
-      "Roger Ebert",
-      "Computer Chess",
-      Categories::FILM.id,
-      "Here's a movie by nerds, for nerds, and about nerds."
-    )
-
-    visit "/editor"
-    click_on "Articles"
-    click_on "Computer Chess"
-    click_on "Edit"
-
-    attach_file("article_image", File.expand_path("spec/fixtures/files/test.png"))
-    click_on "Save"
-
-    expect(page).to have_css("img[src$='test.png']")
-  end
-
   it "lets the editor delete the article" do
     article_service.create(
       "Roger Ebert",

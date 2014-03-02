@@ -31,16 +31,17 @@ module Persistence
       dataset.reverse_order(:published).where(:category_id => id).all.map { |hash| Model.new(hash) }
     end
 
-    def create(author, title, category, content)
+    def create(author, title, category, content, image_url = nil)
       @db[:articles].insert(
         :author => author,
         :title => title,
         :category_id => category,
-        :content => content
+        :content => content,
+        :image_url => image_url
       )
     end
 
-    def update(id, author, title, category, content, image_url)
+    def update(id, author, title, category, content, image_url = nil)
       @db[:articles].where(:id => id).update(
         :author => author,
         :title => title,

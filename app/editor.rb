@@ -56,11 +56,22 @@ class Editor < Base
   post "/editor/articles/?" do
     protected! do
       article_params = params[:article]
+
+      image_url = if article_params[:image]
+        upload_image(
+          article_params[:image][:filename],
+          article_params[:image][:tempfile]
+        )
+      else
+        nil
+      end
+
       article_service.create(
         article_params[:author],
         article_params[:title],
         article_params[:category],
-        article_params[:content]
+        article_params[:content],
+        image_url
       )
 
       redirect to("/editor/articles")
