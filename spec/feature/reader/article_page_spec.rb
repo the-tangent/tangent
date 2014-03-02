@@ -15,7 +15,8 @@ describe "Article page" do
       "Roger Ebert",
       "Computer Chess",
       nil,
-      "The *best*:\n\nMovie."
+      "The *best*:\n\nMovie.",
+      "http://someimagehost.com/test.png"
     )
 
     time = Time.parse("4 February 2014")
@@ -27,6 +28,7 @@ describe "Article page" do
     expect(page).to have_content("Computer Chess")
     expect(page).to have_content("Roger Ebert")
     expect(page).to have_content("4 February 2014")
+    expect(page).to have_css("img[src='http://someimagehost.com/test.png']")
 
     expect(page.html).to include("<p>The <em>best</em>:</p>")
     expect(page.html).to include("<p>Movie.</p>")
