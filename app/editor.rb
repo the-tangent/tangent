@@ -65,8 +65,8 @@ class Editor < Base
       )
 
       image_url = if article_params[:image]
-        uploader = Persistence::ImageUploader.new(article_params[:image], storage)
-        uploader.upload("article#{article_id}")
+        uploader = Persistence::ArticleImageService.new(storage)
+        uploader.upload(article_id, article_params[:image])
       else
         nil
       end
@@ -88,8 +88,8 @@ class Editor < Base
       article_params = params[:article]
 
       image_url = if article_params[:image]
-        uploader = Persistence::ImageUploader.new(article_params[:image], storage)
-        uploader.upload("article#{params[:id]}")
+        uploader = Persistence::ArticleImageService.new(storage)
+        uploader.upload(params[:id], article_params[:image])
       else
         nil
       end
