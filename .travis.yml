@@ -1,7 +1,7 @@
 language: ruby
 rvm:
 - 2.0.0
-script:
+before_script:
   - bundle exec rake db:migrate
 deploy:
   provider: heroku
