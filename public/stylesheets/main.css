@@ -4,13 +4,19 @@ body {
   background-image: url('/images/background.png');
   padding-bottom: 24px;
   font-family: sans-serif;
+  font-weight: 300;
+  font-size: 15px;
+}
+
+h5 {
+  font-size: 15px;
 }
 
 /* Nav bar */
 
 .logo {
   font-family: 'Six Caps', sans-serif;
-  font-size: 56px;
+  font-size: 60px;
   color: black;
 }
 
@@ -51,7 +57,6 @@ body {
 .manifesto {
   margin-top: 32px;
   font-size: 20px;
-  font-weight: 300;
 }
 
 /* Article tile */
@@ -65,6 +70,10 @@ body {
 }
 
 /* Article show */
+
+.article {
+  margin-top: 30px;
+}
 
 .article .image {
   margin-bottom: 10px
