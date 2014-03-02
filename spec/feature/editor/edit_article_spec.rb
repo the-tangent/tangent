@@ -36,4 +36,24 @@ describe "The editor's article edit page" do
     expect(page).to have_content("David Chen")
     expect(page).to have_content("Computer Chess")
   end
+
+  it "lets the editor delete the article" do
+    article_service.create(
+      "Roger Ebert",
+      "Computer Chess",
+      Categories::FILM.id,
+      "Here's a movie by nerds, for nerds, and about nerds."
+    )
+
+    visit "/editor"
+    click_on "Articles"
+    click_on "Computer Chess"
+    click_on "Edit"
+
+    click_on "Delete"
+
+    visit "/editor"
+    click_on "Articles"
+    expect(page).to have_no_content("Computer Chess")
+  end
 end

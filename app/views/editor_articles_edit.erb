@@ -5,6 +5,12 @@
 <% end %>
 
 <div class="page-header">
+  <div class="btn-group pull-right">
+    <form accept-charset="UTF-8" action="/editor/articles/<%= article.id %>" method="post">
+      <input type="hidden" name="_method" value="delete" />
+      <button type="submit" class="btn btn-success">Delete</button>
+    </form>
+  </div>
   <h3>Edit Article</h3>
 </div>
 

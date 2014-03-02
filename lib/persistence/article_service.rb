@@ -49,6 +49,10 @@ module Persistence
       )
     end
 
+    def delete(id)
+      @db[:articles].where(:id => id).delete
+    end
+
     def publish(id, time)
       @db[:articles].where(:id => id).update(:published => time)
     end

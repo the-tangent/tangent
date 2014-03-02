@@ -80,6 +80,13 @@ class Editor < Base
     end
   end
 
+  delete "/editor/articles/:id/?" do
+    protected! do
+      article_service.delete(params[:id])
+      redirect to("/editor/articles")
+    end
+  end
+
   post "/editor/articles/:id/publishing/?" do
     protected! do
       publisher = Domain::ArticlePublisher.new(params[:id], article_service)
