@@ -1,6 +1,8 @@
 tangent
 =======
 
+[![Build Status](https://travis-ci.org/seadowg/tangent.png?branch=master)](https://travis-ci.org/seadowg/tangent)
+
 We’re going to start a newspaper. Online. Why? Because we’re bored of newspapers but we’re not bored of news.
 
 ## Setup
@@ -12,7 +14,7 @@ We’re going to start a newspaper. Online. Why? Because we’re bored of newspa
   gem install bundler
   bundle
   ```
-  
+
 4. Initialize and create the database:
 
   ```bash
