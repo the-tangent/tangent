@@ -3,6 +3,7 @@ class Editor < Base
 
   include Pharrell::Injectable
   injected :clock, System::Clock
+  injected :storage, Fog::Storage::AWS::Directory
 
   before do
     if ENV["RACK_ENV"] == "production"
@@ -69,11 +70,22 @@ class Editor < Base
   put "/editor/articles/:id/?" do
     protected! do
       article_params = params[:article]
+
+      image_url = if article_params[:image]
+        upload_image(
+          article_params[:image][:filename],
+          article_params[:image][:tempfile]
+        )
+      else
+        nil
+      end
+
       article_service.update(params[:id],
         article_params[:author],
         article_params[:title],
         article_params[:category],
-        article_params[:content]
+        article_params[:content],
+        image_url
       )
 
       redirect to("/editor/articles/#{params[:id]}")
@@ -119,5 +131,17 @@ class Editor < Base
       articles = article_service.fetch_all_from_category(category.id)
       erb :editor_categories_show, :locals => { :category => category, :articles => articles }, :layout => :editor_layout
     end
+  end
+
+  private
+
+  def upload_image(file_name, file)
+    file = storage.files.create(
+      :key => file_name,
+      :body => file,
+      :public => true
+    )
+
+    file.public_url
   end
 end

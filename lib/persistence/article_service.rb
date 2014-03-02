@@ -40,12 +40,13 @@ module Persistence
       )
     end
 
-    def update(id, author, title, category, content)
+    def update(id, author, title, category, content, image_url)
       @db[:articles].where(:id => id).update(
         :author => author,
         :title => title,
         :category_id => category,
-        :content => content
+        :content => content,
+        :image_url => image_url
       )
     end
 

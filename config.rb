@@ -1,6 +1,24 @@
+unless ENV["RACK_ENV"] == "production"
+  Fog.mock!
+
+  FOG = Fog::Storage.new(
+    :provider => "AWS",
+    :aws_access_key_id => ENV["S3_ACCESS_KEY"] || "",
+    :aws_secret_access_key => ENV["S3_SECRET_KEY"] || ""
+  )
+
+  FOG.directories.create(
+    :key    => "the-tangent",
+    :public => true
+  )
+end
+
 Pharrell.config(:base) do |config|
   config.bind(System::Clock, System::Clock.new)
   config.bind(Persistence::ArticleService, Persistence::ArticleService)
+
+  directory = FOG.directories.select { |d| d.key == "the-tangent" }.first
+  config.bind(Fog::Storage::AWS::Directory, directory)
 end
 
 Pharrell.config(:test, :extends => :base) do |config|

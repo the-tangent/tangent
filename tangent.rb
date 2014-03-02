@@ -5,6 +5,8 @@ require "sequel"
 require "redcarpet"
 require "pharrell"
 
+require "fog"
+
 require "./lib/all"
 require "./config"
 
