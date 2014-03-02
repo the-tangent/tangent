@@ -5,12 +5,12 @@ module Persistence
       @storage = storage
     end
 
-    def upload
+    def upload(scope)
       file_name = @file[:filename]
       file_body = @file[:tempfile]
 
       file = @storage.files.create(
-        :key => file_name,
+        :key => "#{scope}-#{file_name}",
         :body => file_body,
         :public => true
       )

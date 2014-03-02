@@ -10,6 +10,32 @@ describe Editor do
     Editor
   end
 
+  describe "POST /editor/articles" do
+    it "uploads files under a scope" do
+      authorize "admin", "admin"
+      post "/editor/articles", :article => {
+        :image => Rack::Test::UploadedFile.new(File.expand_path("spec/fixtures/files/test.png"), "image/png")
+      }
+
+      article = article_service.fetch_all.first
+      expect(article.image_url).to include("/article#{article.id}-test.png")
+    end
+  end
+
+  describe "PUT /editor/articles" do
+    it "uploads files under a scope" do
+      id = article_service.create("Roger Ebert", "Computers", Categories::FILM.id, "Some stuff")
+
+      authorize "admin", "admin"
+      put "/editor/articles/#{id}", :article => {
+        :image => Rack::Test::UploadedFile.new(File.expand_path("spec/fixtures/files/test.png"), "image/png")
+      }
+
+      article = article_service.fetch_all.first
+      expect(article.image_url).to include("/article#{article.id}-test.png")
+    end
+  end
+
   describe "POST /editor/articles/:id/publishing" do
     it "redirects to the article show page" do
       article_service.create("Roger Ebert", "Computers", Categories::FILM.id, "Some stuff")

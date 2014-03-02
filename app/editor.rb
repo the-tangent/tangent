@@ -57,14 +57,21 @@ class Editor < Base
     protected! do
       article_params = params[:article]
 
+      article_id = article_service.create(
+        article_params[:author],
+        article_params[:title],
+        article_params[:category],
+        article_params[:content]
+      )
+
       image_url = if article_params[:image]
         uploader = Persistence::ImageUploader.new(article_params[:image], storage)
-        uploader.upload
+        uploader.upload("article#{article_id}")
       else
         nil
       end
 
-      article_service.create(
+      article_service.update(article_id,
         article_params[:author],
         article_params[:title],
         article_params[:category],
@@ -82,7 +89,7 @@ class Editor < Base
 
       image_url = if article_params[:image]
         uploader = Persistence::ImageUploader.new(article_params[:image], storage)
-        uploader.upload
+        uploader.upload("article#{params[:id]}")
       else
         nil
       end
