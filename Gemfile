@@ -17,6 +17,8 @@ gem "unf"
 gem 'redcarpet'
 gem 'pharrell'
 
+gem 'rspec'
+
 group :development do
   gem 'sqlite3'
   gem 'foreman'
@@ -25,6 +27,5 @@ end
 
 group :test do
   gem 'capybara'
-  gem 'rspec'
   gem 'emoji-rspec'
 end
