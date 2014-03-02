@@ -8,6 +8,7 @@ describe Persistence::ArticleService do
   describe "#fetch" do
     it "returns nil if the id does not exist" do
       expect(service.fetch(0)).to eq(nil)
+      expect(service.fetch("hello")).to eq(nil)
     end
   end
 

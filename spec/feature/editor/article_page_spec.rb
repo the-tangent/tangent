@@ -29,49 +29,51 @@ describe "The editor's article show page" do
     expect(page.html).to include("<p>For nerds, and about nerds.</p>")
   end
 
-  it "lets the editor publish/unpublish an article" do
-    article_service.create(
-      "Roger Ebert",
-      "Computer Chess",
-      Categories::FILM.id,
-      "Here's a movie by nerds, for nerds, and about nerds."
-    )
+  describe "clicking on publish" do
+    it "publishes/unpublishes articles" do
+      article_service.create(
+        "Roger Ebert",
+        "Computer Chess",
+        Categories::FILM.id,
+        "Here's a movie by nerds, for nerds, and about nerds."
+      )
 
-    visit "/editor"
-    click_on "Articles"
-    click_on "Computer Chess"
+      visit "/editor"
+      click_on "Articles"
+      click_on "Computer Chess"
 
-    click_on "Publish"
+      click_on "Publish"
 
-    visit "/"
-    expect(page).to have_content("Computer Chess")
+      visit "/"
+      expect(page).to have_content("Computer Chess")
 
-    visit "/editor"
-    click_on "Articles"
-    click_on "Computer Chess"
+      visit "/editor"
+      click_on "Articles"
+      click_on "Computer Chess"
 
-    click_on "Unpublish"
+      click_on "Unpublish"
 
-    visit "/"
-    expect(page).to have_no_content("Computer Chess")
-  end
+      visit "/"
+      expect(page).to have_no_content("Computer Chess")
+    end
 
-  it "shows an error if an unfinished article is published" do
-    article_service.create(
-      "",
-      "Computer Chess",
-      Categories::FILM.id,
-      "Here's a movie by nerds, for nerds, and about nerds."
-    )
+    it "shows an error if an unfinished article is published" do
+      article_service.create(
+        "",
+        "Computer Chess",
+        Categories::FILM.id,
+        "Here's a movie by nerds, for nerds, and about nerds."
+      )
 
-    visit "/editor"
-    click_on "Articles"
-    click_on "Computer Chess"
+      visit "/editor"
+      click_on "Articles"
+      click_on "Computer Chess"
 
-    click_on "Publish"
-    expect(page).to have_content("not finished")
+      click_on "Publish"
+      expect(page).to have_content("not finished")
 
-    visit "/"
-    expect(page).to have_no_content("Computer Chess")
+      visit "/"
+      expect(page).to have_no_content("Computer Chess")
+    end
   end
 end
