@@ -6,10 +6,14 @@
   <h3><%= article.title %> <small><%= article.author %></small></h3>
 </div>
 
-<% if article.image_url %>
-  <img src="<%= article.image_url %>">
-<% end %>
+<div class="article">
+  <% if article.image_url %>
+    <div class="image">
+        <img src="<%= article.image_url %>">
+    </div>
+  <% end %>
 
-<div>
-  <%= article.content %>
+  <div class="content">
+    <%= article.content %>
+  </div>
 </div>

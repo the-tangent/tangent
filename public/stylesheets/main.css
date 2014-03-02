@@ -65,6 +65,10 @@ body {
 
 /* Article show */
 
+.article .image {
+  margin-bottom: 10px
+}
+
 .article .content {
   text-align: justify;
 }
