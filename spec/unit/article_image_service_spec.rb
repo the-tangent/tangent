@@ -2,7 +2,21 @@ require_relative "../../lib/persistence/database"
 require_relative "../../lib/persistence/article_service"
 
 describe Persistence::ArticleService do
-  let(:storage) { Pharrell.instance_for(Fog::Storage::AWS::Directory) }
+  let(:storage) {
+    Fog.mock!
+
+    fog = Fog::Storage.new(
+      :provider => "AWS",
+      :aws_access_key_id => "",
+      :aws_secret_access_key => ""
+    )
+
+    FOG.directories.create(
+      :key    => "test",
+      :public => true
+    )
+  }
+
   let(:service) { Persistence::ArticleImageService.new(storage) }
 
   describe "#upload" do
