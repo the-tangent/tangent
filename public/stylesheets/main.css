@@ -88,6 +88,12 @@ body {
   margin-top: 40px
 }
 
+/* About */
+
+.about {
+  text-align: justify;
+}
+
 /* General responsive */
 
 @media (min-width: 768px) {
