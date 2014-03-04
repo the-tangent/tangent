@@ -1,8 +1,8 @@
 require_relative "../../lib/persistence/database"
 require_relative "../../lib/persistence/article_service"
 
-describe Persistence::ArticleService do
-  let(:storage) { TestFogBucket.new }
+describe Persistence::ArticleImageService do
+  let(:storage) { FakeBucket.new }
   let(:service) { Persistence::ArticleImageService.new(storage) }
 
   describe "#upload" do
@@ -21,7 +21,7 @@ describe Persistence::ArticleService do
 
   private
 
-  class TestFogBucket
+  class FakeBucket
     def initialize
       @files = []
     end
