@@ -28,7 +28,7 @@ class Editor < Base
     protected! do
       service = if params[:published] == "true"
         article_service.published
-      else
+      else params[:published] == "false"
         article_service.unpublished
       end
 
@@ -84,7 +84,7 @@ class Editor < Base
         image_url
       )
 
-      redirect to(article_index_path)
+      redirect to("/editor/articles")
     end
   end
 
@@ -113,7 +113,7 @@ class Editor < Base
   delete "/editor/articles/:id/?" do
     protected! do
       article_service.delete(params[:id])
-      redirect to(article_index_path)
+      redirect to("/editor/articles")
     end
   end
 
@@ -149,11 +149,5 @@ class Editor < Base
       articles = article_service.fetch_all_from_category(category.id)
       erb :editor_categories_show, :locals => { :category => category, :articles => articles }, :layout => :editor_layout
     end
-  end
-
-  private
-
-  def article_index_path
-    "/editor/articles?published=false"
   end
 end
