@@ -43,4 +43,18 @@ describe "The editor's category page" do
       expect(page).to have_content("Heres a movie by nerds")
     end
   end
+
+  describe "clicking on New Article" do
+    it "lets the editor create an article" do
+      visit "/editor"
+      click_on "Categories"
+      click_on "Here & Now"
+
+      click_on "New Article"
+      fill_in "Title", :with => "Computer Chess"
+      click_on "Save"
+
+      expect(page).to have_content("Computer Chess")
+    end
+  end
 end

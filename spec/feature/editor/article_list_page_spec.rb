@@ -55,7 +55,7 @@ describe "The editor's article list page" do
     expect(page).to have_content("John Rambo")
   end
 
-  describe "clicking on create" do
+  describe "clicking on New Article" do
     it "lets the editor create an article" do
       visit "/editor"
       click_on "Articles"
