@@ -26,7 +26,15 @@ class Editor < Base
 
   get '/editor/articles/?' do
     protected! do
-      articles = article_service.fetch_all
+      service = if params[:published] == "true"
+        article_service.published
+      elsif params[:published] == "false"
+        article_service.unpublished
+      else
+        article_service
+      end
+
+      articles = service.fetch_all
       erb :editor_articles, :locals => { :articles => articles }, :layout => :editor_layout
     end
   end

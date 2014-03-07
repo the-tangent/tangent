@@ -4,13 +4,17 @@ module Persistence
 
     constructor Persistence::Database
 
-    def initialize(db, published: false)
+    def initialize(db, published: nil)
       @db = db
       @published = published
     end
 
     def published
       self.class.new(@db, :published => true)
+    end
+
+    def unpublished
+      self.class.new(@db, :published => false)
     end
 
     def fetch(id)
@@ -66,10 +70,12 @@ module Persistence
     private
 
     def dataset
-      if @published
+      if @published.nil?
+        @db[:articles]
+      elsif @published
         @db[:articles].where("published IS NOT NULL")
       else
-        @db[:articles]
+        @db[:articles].where("published IS NULL")
       end
     end
   end

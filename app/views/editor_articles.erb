@@ -2,6 +2,9 @@
   <h3>Articles</h3>
 </div>
 
+<a href="/editor/articles?published=false">Unpublished</a>
+<a href="/editor/articles?published=true">Published</a>
+
 <% articles.each do |article| %>
     <h4>
       <a href="/editor/articles/<%= article.id %>">
