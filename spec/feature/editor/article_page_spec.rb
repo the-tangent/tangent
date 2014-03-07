@@ -49,6 +49,7 @@ describe "The editor's article show page" do
 
       visit "/editor"
       click_on "Articles"
+      click_on "Published"
       click_on "Computer Chess"
 
       click_on "Unpublish"
