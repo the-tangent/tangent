@@ -81,7 +81,7 @@ class Editor < Base
         image_url
       )
 
-      redirect to("/editor/articles")
+      redirect to("/editor/articles/#{article_id}")
     end
   end
 

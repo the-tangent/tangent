@@ -24,8 +24,6 @@ describe "Uploading images for an article" do
     attach_file("article_image", File.expand_path("spec/fixtures/files/test.png"))
     click_on "Save"
 
-    click_on "Computer Chess"
-
     expect(page).to have_css("img[src$='test.png']")
   end
 
