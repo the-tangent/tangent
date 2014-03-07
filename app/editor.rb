@@ -28,10 +28,8 @@ class Editor < Base
     protected! do
       service = if params[:published] == "true"
         article_service.published
-      elsif params[:published] == "false"
-        article_service.unpublished
       else
-        article_service
+        article_service.unpublished
       end
 
       articles = service.fetch_all
