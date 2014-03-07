@@ -26,13 +26,7 @@ class Editor < Base
 
   get '/editor/articles/?' do
     protected! do
-      service = if params[:published] == "true"
-        article_service.published
-      else params[:published] == "false"
-        article_service.unpublished
-      end
-
-      articles = service.fetch_all
+      articles = published_service(params[:published]).fetch_all
       erb :editor_articles, :locals => { :articles => articles }, :layout => :editor_layout
     end
   end
@@ -146,8 +140,18 @@ class Editor < Base
   get "/editor/categories/:id/?" do
     protected! do
       category = Categories.fetch(params[:id])
-      articles = article_service.fetch_all_from_category(category.id)
+      articles = published_service(params[:published]).fetch_all_from_category(category.id)
       erb :editor_categories_show, :locals => { :category => category, :articles => articles }, :layout => :editor_layout
+    end
+  end
+
+  private
+
+  def published_service(published)
+    if published == "true"
+      article_service.published
+    else
+      article_service.unpublished
     end
   end
 end
