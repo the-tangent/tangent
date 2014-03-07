@@ -1,5 +1,7 @@
-<a href="<%= path %>?published=false">Unpublished</a>
-<a href="<%= path %>?published=true">Published</a>
+<ul class="nav nav-tabs">
+  <li class="<%= published ? "" : "active"%>"><a href="<%= path %>?published=false">Unpublished</a></li>
+  <li class="<%= published ? "active" : ""%>"><a href="<%= path %>?published=true">Published</a></li>
+</ul>
 
 <% articles.each do |article| %>
     <h4>

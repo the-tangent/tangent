@@ -2,7 +2,7 @@
   <h3><%= category.name %>
 </div>
 
-<%= erb :editor_articles_list, :locals => { :articles => articles, :path => "/editor/categories/#{category.id}" } %>
+<%= erb :editor_articles_list, :locals => { :articles => articles, :published => published, :path => "/editor/categories/#{category.id}" } %>
 
 <br>
 <br>
