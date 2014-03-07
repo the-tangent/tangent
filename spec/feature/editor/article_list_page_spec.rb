@@ -67,6 +67,7 @@ describe "The editor's article list page" do
       fill_in "Content", :with => "Here's a movie by nerds, for nerds, and about nerds."
       click_on "Save"
 
+      click_on "Articles"
       expect(page).to have_content("Roger Ebert")
       expect(page).to have_content("Computer Chess")
 
