@@ -75,12 +75,18 @@ module Persistence
     private
 
     def dataset
-      if @published.nil?
+      dataset = if @published.nil?
         @db[:articles]
       elsif @published
         @db[:articles].where("published IS NOT NULL")
       else
         @db[:articles].where("published IS NULL")
+      end
+
+      if @page
+        dataset.limit(@page * 9)
+      else
+        dataset
       end
     end
   end
