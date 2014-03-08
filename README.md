@@ -40,4 +40,4 @@ We’re going to start a newspaper. Online. Why? Because we’re bored of newspa
   bundle exec foreman start
   ```
 
-8. Open the app [here](http://localhost:3000) :tada:.
+8. Open the app [here](http://localhost:3000) :tada: :metal:.
