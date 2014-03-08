@@ -84,7 +84,7 @@ module Persistence
       end
 
       if @page
-        dataset.limit(9).offset(@page * 9)
+        dataset.limit(9)
       else
         dataset
       end
