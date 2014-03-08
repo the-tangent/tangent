@@ -7,7 +7,7 @@ class Reader < Base
 
   get "/home" do
     flagged! do
-      articles = article_service.published.fetch_all
+      articles = service.fetch_all
       tiles = articles.map { |a| Widget::Tile.new(a) }
 
       erb :articles, :locals => { :categories => Categories::ALL, :articles => tiles }
@@ -20,7 +20,7 @@ class Reader < Base
 
   get "/categories/:id/?" do
     flagged! do
-      articles = article_service.published.fetch_all_from_category(params[:id])
+      articles = service.fetch_all_from_category(params[:id])
       tiles = articles.map { |a| Widget::Tile.new(a) }
 
       erb :articles, :locals => { :categories => Categories::ALL, :articles => tiles }
@@ -29,7 +29,7 @@ class Reader < Base
 
   get "/articles/:id/?" do
     flagged! do
-      article = article_service.published.fetch(params[:id].to_i)
+      article = service.fetch(params[:id].to_i)
 
       if article
         article_widget = Widget::Article.new(article)
@@ -44,5 +44,11 @@ class Reader < Base
         raise Sinatra::NotFound
       end
     end
+  end
+
+  private
+
+  def service
+    article_service.published
   end
 end
