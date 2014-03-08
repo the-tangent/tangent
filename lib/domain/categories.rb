@@ -9,7 +9,7 @@ class Categories
   end
 
   ALL = [
-    HEREANDNOW = Category.new("hereandnow", "Here & Now"),
+    HEREANDNOW = Category.new("hereandnow", "Here/Now"),
     LIFE = Category.new("life", "Life"),
     ART = Category.new("art", "Art"),
     SCIENCE = Category.new("science", "Science"),

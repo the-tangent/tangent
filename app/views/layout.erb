@@ -14,13 +14,13 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
-          <h1><a href="/" class="logo">The Tangent</a> <small><%= date.strftime("%e %B %Y") %></small></h1>
+          <h1><a href="/" class="logo">The Tangent</a></h1>
         </div>
       </div>
 
       <div class="row categories">
         <% categories.each do |category| %>
-          <div class="col-sm-2 category">
+          <div class="col-sm-1 category">
               <h5>
                 <a href="/categories/<%= category.id %>">
                   <%= category.name %>
@@ -28,6 +28,9 @@
               </h5>
           </div>
         <% end %>
+        <div class="pull-right date">
+          <h5><%= date.strftime("%e %B %Y") %><h5>
+        </div>
       </div>
 
       <%= yield %>

@@ -30,11 +30,14 @@ body {
   color: black;
 }
 
+.date {
+  margin-right: 15px;
+}
+
 @media (min-width: 768px) {
   .category {
     text-align: center;
-    border-left: 1px solid #F5F5F5;
-    border-right: 1px solid #F5F5F5;
+    border-right: 2px solid #F5F5F5;
   }
 }
 
