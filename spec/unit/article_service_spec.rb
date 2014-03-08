@@ -60,4 +60,8 @@ describe Persistence::ArticleService do
       expect(service.fetch(ids[1]).published).to eq(time)
     end
   end
+
+  describe "#page" do
+    it "returns querys that yield the nth page of 9 articles"
+  end
 end
