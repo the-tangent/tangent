@@ -2,6 +2,7 @@ tangent
 =======
 
 [![Build Status](https://travis-ci.org/seadowg/tangent.png?branch=master)](https://travis-ci.org/seadowg/tangent)
+[![Coverage Status](https://coveralls.io/repos/seadowg/tangent/badge.png)](https://coveralls.io/r/seadowg/tangent)
 
 We’re going to start a newspaper. Online. Why? Because we’re bored of newspapers but we’re not bored of news.
 

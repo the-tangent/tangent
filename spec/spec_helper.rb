@@ -1,5 +1,8 @@
 ENV["RACK_ENV"] = "test"
 
+require 'coveralls'
+Coveralls.wear!
+
 require_relative 'support/fake_clock'
 require_relative '../tangent'
 require 'capybara'

@@ -28,4 +28,5 @@ end
 group :test do
   gem 'capybara'
   gem 'emoji-rspec'
+  gem 'coveralls', require: false
 end
