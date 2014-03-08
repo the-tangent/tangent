@@ -4,17 +4,22 @@ module Persistence
 
     constructor Persistence::Database
 
-    def initialize(db, published: nil)
+    def initialize(db, published: nil, page: nil)
       @db = db
       @published = published
+      @page = page
     end
 
     def published
-      self.class.new(@db, :published => true)
+      self.class.new(@db, :published => true, :page => @page)
     end
 
     def unpublished
-      self.class.new(@db, :published => false)
+      self.class.new(@db, :published => false, :page => @page)
+    end
+
+    def page(n)
+      self.class.new(@db, :page => n, :published => @published)
     end
 
     def fetch(id)

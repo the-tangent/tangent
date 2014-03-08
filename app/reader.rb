@@ -49,6 +49,6 @@ class Reader < Base
   private
 
   def service
-    article_service.published
+    article_service.published.page(params[:p])
   end
 end
