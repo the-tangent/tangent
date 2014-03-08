@@ -1,5 +1,6 @@
 ENV["RACK_ENV"] = "test"
 
+require_relative 'support/fake_clock'
 require_relative '../tangent'
 require 'capybara'
 require 'capybara/dsl'

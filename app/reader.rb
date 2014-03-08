@@ -1,6 +1,8 @@
 class Reader < Base
   helpers Sinatra::Nedry
 
+  injected :clock, System::Clock
+
   get "/" do
     redirect to("/home")
   end
@@ -10,12 +12,12 @@ class Reader < Base
       articles = service.fetch_all
       tiles = articles.map { |a| Widget::Tile.new(a) }
 
-      erb :articles, :locals => { :categories => Categories::ALL, :articles => tiles }
+      render_layout :articles, :articles => tiles
     end
   end
 
   get "/about/?" do
-    erb :about,:locals => { :categories => Categories::ALL }
+    render_layout :about
   end
 
   get "/categories/:id/?" do
@@ -23,7 +25,7 @@ class Reader < Base
       articles = service.fetch_all_from_category(params[:id])
       tiles = articles.map { |a| Widget::Tile.new(a) }
 
-      erb :articles, :locals => { :categories => Categories::ALL, :articles => tiles }
+      render_layout :articles, :articles => tiles
     end
   end
 
@@ -35,11 +37,7 @@ class Reader < Base
         article_widget = Widget::Article.new(article)
         comments = Widget::Comments.new(ENV["RACK_ENV"])
 
-        erb :articles_show, :locals => {
-          :categories => Categories::ALL,
-          :article => article_widget,
-          :comments => comments
-        }
+        render_layout :articles_show, :article => article_widget, :comments => comments
       else
         raise Sinatra::NotFound
       end
@@ -47,6 +45,11 @@ class Reader < Base
   end
 
   private
+
+  def render_layout(template, locals = {})
+    locals = locals.merge(:date => clock.now, :categories => Categories::ALL)
+    erb(template, :locals => locals)
+  end
 
   def service
     article_service.published.page(0)

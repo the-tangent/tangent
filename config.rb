@@ -30,6 +30,7 @@ end
 Pharrell.config(:test, :extends => :base) do |config|
   db = Persistence::Database.new("sqlite://db/tangent-test.db").connect
   config.bind(Persistence::Database, db)
+  config.bind(System::Clock, FakeClock.new)
 end
 
 Pharrell.config(:development, :extends => :base) do |config|

@@ -5,9 +5,17 @@ describe "Homepage" do
   include Pharrell::Injectable
 
   injected :article_service, Persistence::ArticleService
+  injected :clock, System::Clock
 
   before do
     Capybara.app = Tangent.new
+  end
+
+  it "shows the current date" do
+    clock.set_time("19/01/2014")
+
+    visit "/"
+    expect(page).to have_content("19 January 2014")
   end
 
   it "lists articles with summaries" do
