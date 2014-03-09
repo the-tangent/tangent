@@ -27,6 +27,7 @@ body {
 }
 
 .category a {
+  padding-left: 15px;
   color: black;
 }
 
@@ -36,6 +37,8 @@ body {
 
 @media (min-width: 768px) {
   .category {
+    padding-right: 15px;
+    display: inline-block;
     text-align: center;
     border-right: 2px solid #F5F5F5;
   }

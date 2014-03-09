@@ -48,7 +48,7 @@ describe "The editor's category page" do
     it "lets the editor create an article" do
       visit "/editor"
       click_on "Categories"
-      click_on "Here/Now"
+      click_on "Here & Now"
 
       click_on "New Article"
       fill_in "Title", :with => "Computer Chess"

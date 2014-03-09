@@ -46,7 +46,7 @@ describe "Homepage" do
 
   it "links to the categories" do
     visit "/"
-    expect(page).to have_link("Here/Now")
+    expect(page).to have_link("Here & Now")
     expect(page).to have_link("Life")
     expect(page).to have_link("Art")
     expect(page).to have_link("Film")

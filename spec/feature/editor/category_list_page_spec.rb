@@ -12,7 +12,7 @@ describe "The editor's category list page" do
     visit "/editor"
     click_on "Categories"
 
-    expect(page).to have_content("Here/Now")
+    expect(page).to have_content("Here & Now")
     expect(page).to have_content("Life")
     expect(page).to have_content("Art")
     expect(page).to have_content("Science")
