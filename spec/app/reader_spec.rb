@@ -13,4 +13,11 @@ describe Reader do
       expect(last_response).to be_not_found
     end
   end
+
+  describe "GET /about" do
+    it "returns a success" do
+      get "/about"
+      expect(last_response).to be_ok
+    end
+  end
 end
