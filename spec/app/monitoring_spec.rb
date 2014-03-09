@@ -10,7 +10,7 @@ describe Monitoring do
   describe "GET /ping" do
     it "says pong" do
       get "/ping"
-      
+
       expect(last_response).to be_ok
       expect(last_response.body).to include("pong")
     end
