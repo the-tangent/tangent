@@ -4,22 +4,21 @@ module Persistence
 
     constructor Persistence::Database
 
-    def initialize(db, published: nil, page: nil)
+    def initialize(db, options = {})
       @db = db
-      @published = published
-      @page = page
+      @options = options
     end
 
     def published
-      self.class.new(@db, :published => true, :page => @page)
+      self.class.new(@db, @options.merge(:published => true))
     end
 
     def unpublished
-      self.class.new(@db, :published => false, :page => @page)
+      self.class.new(@db, @options.merge(:published => false))
     end
 
     def page(n)
-      self.class.new(@db, :page => n, :published => @published)
+      self.class.new(@db, @options.merge(:page => n))
     end
 
     def fetch(id)
@@ -75,16 +74,16 @@ module Persistence
     private
 
     def dataset
-      dataset = if @published.nil?
+      dataset = if @options[:published].nil?
         @db[:articles]
-      elsif @published
+      elsif @options[:published]
         @db[:articles].where("published IS NOT NULL")
       else
         @db[:articles].where("published IS NULL")
       end
 
-      if @page
-        dataset.limit(9)
+      if @options[:page]
+        dataset.limit(9).offset(@options[:page] * 9)
       else
         dataset
       end
