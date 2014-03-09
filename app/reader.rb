@@ -12,12 +12,12 @@ class Reader < Base
       articles = service.fetch_all
       tiles = articles.map { |a| Widget::Tile.new(a) }
 
-      render_layout :articles, :articles => tiles
+      render_page :articles, :articles => tiles
     end
   end
 
   get "/about/?" do
-    render_layout :about
+    render_page :about
   end
 
   get "/categories/:id/?" do
@@ -25,7 +25,7 @@ class Reader < Base
       articles = service.fetch_all_from_category(params[:id])
       tiles = articles.map { |a| Widget::Tile.new(a) }
 
-      render_layout :articles, :articles => tiles
+      render_page :articles, :articles => tiles
     end
   end
 
@@ -37,7 +37,7 @@ class Reader < Base
         article_widget = Widget::Article.new(article)
         comments = Widget::Comments.new(ENV["RACK_ENV"])
 
-        render_layout :articles_show, :article => article_widget, :comments => comments
+        render_page :articles_show, :article => article_widget, :comments => comments
       else
         raise Sinatra::NotFound
       end
@@ -46,7 +46,7 @@ class Reader < Base
 
   private
 
-  def render_layout(template, locals = {})
+  def render_page(template, locals = {})
     locals = locals.merge(:date => clock.now, :categories => Categories::ALL)
     erb(template, :locals => locals)
   end

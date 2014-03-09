@@ -20,23 +20,23 @@ class Editor < Base
 
   get '/editor/?' do
     protected! do
-      erb :editor, :layout => :editor_layout
+      render_page :editor
     end
   end
 
   get '/editor/articles/?' do
     protected! do
       articles = published_service(params[:published]).fetch_all
-      erb :editor_articles, :locals => {
+      render_page :editor_articles, {
         :articles => articles,
         :published => params[:published] == "true",
-      }, :layout => :editor_layout
+      }
     end
   end
 
   get '/editor/articles/new/?' do
     protected! do
-      erb :editor_articles_new, :locals => { :categories => Categories::ALL }, :layout => :editor_layout
+      render_page :editor_articles_new, :categories => Categories::ALL
     end
   end
 
@@ -45,14 +45,14 @@ class Editor < Base
       article = article_service.fetch(params[:id])
       widget = Widget::Article.new(article)
 
-      erb :editor_articles_show, :locals => { :article => widget }, :layout => :editor_layout
+      render_page :editor_articles_show, :article => widget
     end
   end
 
   get '/editor/articles/:id/edit/?' do
     protected! do
       article = article_service.fetch(params[:id])
-      erb :editor_articles_edit, :locals => { :article => article, :categories => Categories::ALL }, :layout => :editor_layout
+      render_page :editor_articles_edit, :article => article, :categories => Categories::ALL
     end
   end
 
@@ -120,7 +120,7 @@ class Editor < Base
       article = publisher.publish(clock.now)
 
       if article.error
-        erb :editor_articles_edit, :locals => { :article => article, :categories => Categories::ALL }, :layout => :editor_layout
+        render_page :editor_articles_edit, :article => article, :categories => Categories::ALL
       else
         redirect to("/editor/articles/#{params[:id]}")
       end
@@ -136,7 +136,7 @@ class Editor < Base
 
   get "/editor/categories/?" do
     protected! do
-      erb :editor_categories, :locals => { :categories => Categories::ALL }, :layout => :editor_layout
+      render_page :editor_categories, :categories => Categories::ALL
     end
   end
 
@@ -144,15 +144,20 @@ class Editor < Base
     protected! do
       category = Categories.fetch(params[:id])
       articles = published_service(params[:published]).fetch_all_from_category(category.id)
-      erb :editor_categories_show, :locals => {
+      render_page :editor_categories_show, {
         :category => category,
         :published => params[:published] == "true",
         :articles => articles
-      }, :layout => :editor_layout
+      }
     end
   end
 
   private
+
+  def render_page(template, locals = {})
+    locals = locals.merge(:date => clock.now, :categories => Categories::ALL)
+    erb(template, :locals => locals, :layout => :editor_layout)
+  end
 
   def published_service(published)
     if published == "true"
