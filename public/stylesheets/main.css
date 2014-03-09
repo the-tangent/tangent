@@ -90,6 +90,7 @@ body {
 
 .tile .summary {
   text-align: justify;
+  font-size: 14px;
 }
 
 /* Article show */
