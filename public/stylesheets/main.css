@@ -59,12 +59,20 @@ body {
   border-top: 1px solid black;
 }
 
-.footer .footer-links a {
+.footer-link {
+  padding-left: 15px;
+}
+
+.footer-link a {
   color: black;
 }
 
-.categories .category {
-  color: black;
+@media (min-width: 768px) {
+  .footer-link {
+    padding-right: 15px;
+    display: inline-block;
+    text-align: center;
+  }
 }
 
 /* Manifesto */
