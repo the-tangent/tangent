@@ -12,7 +12,7 @@ class Reader < Base
       articles = service.fetch_all
       tiles = articles.map { |a| Widget::Tile.new(a) }
 
-      render_page :articles, :articles => tiles
+      render_page :articles, :articles => tiles, :opts => { :home_active => true }
     end
   end
 
@@ -25,7 +25,7 @@ class Reader < Base
       articles = service.fetch_all_from_category(params[:id])
       tiles = articles.map { |a| Widget::Tile.new(a) }
 
-      render_page :articles, :articles => tiles
+      render_page :articles, :articles => tiles, :opts => { :active_category => params[:id] }
     end
   end
 
@@ -48,6 +48,7 @@ class Reader < Base
 
   def render_page(template, locals = {})
     locals = locals.merge(:date => clock.now, :categories => Categories::ALL)
+    locals[:opts] ||= {}
     erb(template, :locals => locals)
   end
 

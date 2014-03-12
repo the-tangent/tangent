@@ -19,7 +19,7 @@
       </div>
 
       <div class="row categories">
-        <div class="category">
+        <div class="category <%= opts[:home_active] ? 'active' : '' %>">
             <h5>
               <a href="/home">
                 Home
@@ -28,7 +28,7 @@
         </div>
 
         <% categories.each do |category| %>
-          <div class="category">
+          <div class="category <%= opts[:active_category] == category.id ? 'active' : '' %>">
               <h5>
                 <a href="/categories/<%= category.id %>">
                   <%= category.name %>
