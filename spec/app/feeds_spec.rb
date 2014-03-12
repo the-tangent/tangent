@@ -11,7 +11,7 @@ describe Feeds do
     Feeds
   end
 
-  describe "GET /feeds/articles" do
+  describe "GET /rss.xml" do
     it "returns the last 20 published articles" do
       ids = 20.times.map do |i|
         article_id = article_service.create("", "title#{i}", "film", "content#{i}")
@@ -21,7 +21,7 @@ describe Feeds do
 
       article_service.create("", "title20", "film", "content20")
 
-      get "/feeds/articles"
+      get "/rss.xml"
 
       xml = Nokogiri::XML(last_response.body)
       expect(xml.root.name).to eq("rss")
