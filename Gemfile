@@ -15,6 +15,7 @@ gem "fog"
 gem "unf"
 
 gem 'redcarpet'
+gem 'builder'
 gem 'pharrell'
 
 gem 'rspec'

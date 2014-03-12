@@ -102,6 +102,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  builder
   capybara
   coveralls
   emoji-rspec
