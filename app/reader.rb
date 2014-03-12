@@ -37,7 +37,11 @@ class Reader < Base
         article_widget = Widget::Article.new(article)
         comments = Widget::Comments.new(ENV["RACK_ENV"])
 
-        render_page :articles_show, :article => article_widget, :comments => comments
+        render_page :articles_show, {
+          :article => article_widget,
+          :comments => comments,
+          :opts => { :active_category => article.category_id }
+        }
       else
         raise Sinatra::NotFound
       end
