@@ -10,6 +10,8 @@ require 'capybara/dsl'
 require 'rspec'
 require 'pharrell'
 
+ENV["DOMAIN"] = "test.example.com"
+
 RSpec.configure do |config|
   config.around(:each) do |example|
     Pharrell.instance_for(Persistence::Database).transaction(:rollback=>:always){example.run}

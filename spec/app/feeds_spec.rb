@@ -48,13 +48,13 @@ describe Feeds do
       expect(description.text).to eq("content19")
 
       link = article.select { |e| e.name == "link" }.first
-      expect(link.text).to eq("http://www.thetangent.org.uk/articles/#{ids.last}")
+      expect(link.text).to eq("http://test.example.com/articles/#{ids.last}")
 
       pub_date = article.select { |e| e.name == "pubDate" }.first
       expect(Time.parse(pub_date.text)).to eq(Time.at(19))
 
       guid = article.select { |e| e.name == "guid" }.first
-      expect(guid.text).to eq("http://www.thetangent.org.uk/articles/#{ids.last}")
+      expect(guid.text).to eq("http://test.example.com/articles/#{ids.last}")
     end
   end
 end
