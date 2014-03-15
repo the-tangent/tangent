@@ -44,8 +44,9 @@ describe Feeds do
       title = article.select { |e| e.name == "title" }.first
       expect(title.text).to eq("title19")
 
-      description = article.select { |e| e.name == "description" }.first
-      expect(description.text).to eq("content19")
+      description_node = article.select { |e| e.name == "description" }.first
+      description = description_node.children.select { |e| e.cdata? }.first
+      expect(description.text).to include("<p><em>content19</em></p>")
 
       link = article.select { |e| e.name == "link" }.first
       expect(link.text).to eq("http://test.example.com/articles/#{ids.last}")

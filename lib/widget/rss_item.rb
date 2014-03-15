@@ -10,9 +10,8 @@ module Widget
     end
 
     def description
-      first_para = @content.split(/\r?\n\r?\n/).first
-      markdown_renderer = ::Redcarpet::Markdown.new(Redcarpet::Render::StripDown)
-      markdown_renderer.render(first_para || "").chomp
+      markdown_renderer = ::Redcarpet::Markdown.new(Redcarpet::Render::HTML)
+      markdown_renderer.render(@content)
     end
 
     def published_date

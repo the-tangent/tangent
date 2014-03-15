@@ -5,12 +5,10 @@ class Feeds < Base
   injected :article_service, Persistence::ArticleService
 
   get "/rss.xml" do
-    flagged! do
-      @articles = article_service.published.fetch_all.take(20).map do |article|
-        Widget::RssItem.new(article)
-      end
-
-      builder :articles
+    @articles = article_service.published.fetch_all.take(20).map do |article|
+      Widget::RssItem.new(article)
     end
+
+    builder :articles
   end
 end
