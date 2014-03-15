@@ -14,14 +14,12 @@ require "./config/pharrell"
 require "./app/monitoring"
 require "./app/base"
 require "./app/editor"
-require "./app/manifesto"
 require "./app/reader"
 require "./app/feeds"
 
 class Tangent < Sinatra::Base
   use Monitoring
   use Editor
-  use Manifesto if ENV["RACK_ENV"] == "production"
   use Reader
   use Feeds
 end

@@ -4,16 +4,10 @@ class Reader < Base
   injected :clock, System::Clock
 
   get "/" do
-    redirect to("/home")
-  end
+    articles = service.fetch_all
+    tiles = articles.map { |a| Widget::Tile.new(a) }
 
-  get "/home" do
-    flagged! do
-      articles = service.fetch_all
-      tiles = articles.map { |a| Widget::Tile.new(a) }
-
-      render_page :articles, :articles => tiles, :opts => { :home_active => true }
-    end
+    render_page :articles, :articles => tiles, :opts => { :home_active => true }
   end
 
   get "/about/?" do
@@ -21,30 +15,26 @@ class Reader < Base
   end
 
   get "/categories/:id/?" do
-    flagged! do
-      articles = service.fetch_all_from_category(params[:id])
-      tiles = articles.map { |a| Widget::Tile.new(a) }
+    articles = service.fetch_all_from_category(params[:id])
+    tiles = articles.map { |a| Widget::Tile.new(a) }
 
-      render_page :articles, :articles => tiles, :opts => { :active_category => params[:id] }
-    end
+    render_page :articles, :articles => tiles, :opts => { :active_category => params[:id] }
   end
 
   get "/articles/:id/?" do
-    flagged! do
-      article = service.fetch(params[:id].to_i)
+    article = service.fetch(params[:id].to_i)
 
-      if article
-        article_widget = Widget::Article.new(article)
-        comments = Widget::Comments.new(ENV["RACK_ENV"])
+    if article
+      article_widget = Widget::Article.new(article)
+      comments = Widget::Comments.new(ENV["RACK_ENV"])
 
-        render_page :articles_show, {
-          :article => article_widget,
-          :comments => comments,
-          :opts => { :active_category => article.category_id }
-        }
-      else
-        raise Sinatra::NotFound
-      end
+      render_page :articles_show, {
+        :article => article_widget,
+        :comments => comments,
+        :opts => { :active_category => article.category_id }
+      }
+    else
+      raise Sinatra::NotFound
     end
   end
 
