@@ -21,7 +21,6 @@ body {
 
 .categories {
   background-color: #d5d5d5;
-  margin-bottom: 20px;
 }
 
 .category {
@@ -60,6 +59,7 @@ body {
 /* Footer */
 
 .footer {
+  margin-top: 20px;
   border-top: 1px solid black;
 }
 
@@ -89,7 +89,7 @@ body {
 /* Article tile */
 
 .tile-row {
-  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 .tile .title {
