@@ -60,7 +60,6 @@ body {
 /* Footer */
 
 .footer {
-  margin-top: 20px;
   border-top: 1px solid black;
 }
 
@@ -88,6 +87,10 @@ body {
 }
 
 /* Article tile */
+
+.tile-row {
+  margin-bottom: 20px;
+}
 
 .tile .title {
   color: black;
