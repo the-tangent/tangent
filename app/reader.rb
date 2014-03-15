@@ -48,6 +48,17 @@ class Reader < Base
     end
   end
 
+  get "/search/?" do
+    flagged! do
+      articles = service.fetch_all
+      query = params[:query].downcase
+
+      results = articles.select { |article| article.title.downcase.include?(query) }
+      tiles = results.map { |result| Widget::Tile.new(result) }
+      render_page :articles, :articles => tiles
+    end
+  end
+
   private
 
   def render_page(template, locals = {})

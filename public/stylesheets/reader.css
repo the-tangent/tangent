@@ -43,13 +43,18 @@ body {
 .category.active a {
   color: white;
 }
-
 .date {
   margin-right: 15px;
 }
 
 @media (min-width: 768px) {
   .category {
+    padding-right: 15px;
+    display: inline-block;
+    text-align: center;
+  }
+
+  .search {
     padding-right: 15px;
     display: inline-block;
     text-align: center;

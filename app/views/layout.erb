@@ -38,6 +38,17 @@
               </h5>
           </div>
         <% end %>
+        <script type="text/javascript">
+          window.onload = function() {
+            document.getElementById("search_submit").style.display = 'none';
+          };
+        </script>
+        <div class="search">
+          <form action="/search" method="get">
+            <input type="text" class="query-field" name="query" id="search_query" placeholder="Search">
+            <button id="search_submit" type="submit">Submit</button>
+          </form>
+        </div>
         <div class="pull-right date">
           <h5><%= date.strftime("%e %B %Y") %><h5>
         </div>
