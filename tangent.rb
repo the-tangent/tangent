@@ -3,6 +3,7 @@ require "sinatra/nedry"
 
 require "sequel"
 require "redcarpet"
+require 'redcarpet/render_strip'
 require "pharrell"
 
 require "fog"
