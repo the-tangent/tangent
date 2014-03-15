@@ -9,7 +9,7 @@ require "pharrell"
 require "fog"
 
 require "./lib/all"
-require "./config"
+require "./config/pharrell"
 
 require "./app/monitoring"
 require "./app/base"
