@@ -9,7 +9,11 @@ xml.rss :version => "2.0" do
       xml.item do
         xml.title article.title
         xml.link article.url
-        xml.description article.description
+        
+        xml.description {
+          xml.cdata!(article.description)
+        }
+
         xml.pubDate article.published_date
         xml.guid article.url
       end
