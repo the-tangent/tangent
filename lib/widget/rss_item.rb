@@ -9,13 +9,13 @@ module Widget
       @published = article.published
     end
 
-    def content
-      markdown_renderer = ::Redcarpet::Markdown.new(Redcarpet::Render::HTML)
-      html = markdown_renderer.render(@content)
-      "<![CDATA[#{html.chomp}]]>"
+    def description
+      first_para = @content.split(/\r?\n\r?\n/).first
+      markdown_renderer = ::Redcarpet::Markdown.new(Redcarpet::Render::StripDown)
+      markdown_renderer.render(first_para || "").chomp
     end
 
-    def published
+    def published_date
       @published.rfc822
     end
 

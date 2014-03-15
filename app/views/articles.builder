@@ -9,8 +9,8 @@ xml.rss :version => "2.0" do
       xml.item do
         xml.title article.title
         xml.link article.url
-        xml.description article.content
-        xml.pubDate article.published
+        xml.description article.description
+        xml.pubDate article.published_date
         xml.guid article.url
       end
     end
