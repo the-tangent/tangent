@@ -8,10 +8,10 @@ xml.rss :version => "2.0" do
     @articles.each do |article|
       xml.item do
         xml.title article.title
-        xml.link "http://#{ENV["DOMAIN"]}/articles/#{article.id}"
+        xml.link article.url
         xml.description article.content
-        xml.pubDate article.published.rfc822
-        xml.guid "http://#{ENV["DOMAIN"]}/articles/#{article.id}"
+        xml.pubDate article.published
+        xml.guid article.url
       end
     end
   end

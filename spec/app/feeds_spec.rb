@@ -14,7 +14,7 @@ describe Feeds do
   describe "GET /rss.xml" do
     it "returns the last 20 published articles" do
       ids = 20.times.map do |i|
-        article_id = article_service.create("", "title#{i}", "film", "content#{i}")
+        article_id = article_service.create("", "title#{i}", "film", "*content#{i}*")
         article_service.publish(article_id, Time.at(i))
         article_id
       end
@@ -45,7 +45,7 @@ describe Feeds do
       expect(title.text).to eq("title19")
 
       description = article.select { |e| e.name == "description" }.first
-      expect(description.text).to eq("content19")
+      expect(description.text).to eq("<![CDATA[<p><em>content19</em></p>]]>")
 
       link = article.select { |e| e.name == "link" }.first
       expect(link.text).to eq("http://test.example.com/articles/#{ids.last}")
