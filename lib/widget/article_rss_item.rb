@@ -1,5 +1,5 @@
 module Widget
-  class RssItem
+  class ArticleRssItem
     attr_reader :id, :title
 
     def initialize(article)

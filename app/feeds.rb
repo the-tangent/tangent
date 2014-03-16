@@ -6,7 +6,7 @@ class Feeds < Base
 
   get "/rss.xml" do
     @articles = article_service.published.page(0, :per_page => 20).fetch_all.map do |article|
-      Widget::RssItem.new(article)
+      Widget::ArticleRssItem.new(article)
     end
 
     builder :articles
