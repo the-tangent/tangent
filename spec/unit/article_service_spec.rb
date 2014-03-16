@@ -62,20 +62,23 @@ describe Persistence::ArticleService do
   end
 
   describe "#page" do
-    it "returns querys that yield the nth page of 9 articles" do
-      10.times do |i|
+    it "returns querys that yield the nth page of y articles" do
+      3.times do |i|
         id = service.create("", "article##{i}", nil, "")
         service.publish(id, Time.at(i))
       end
 
-      result = service.page(0).fetch_all
-      expect(result.length).to eq(9)
-      expect(result.first.title).to eq("article#9")
+      result = service.page(0, :per_page => 2).fetch_all
+      expect(result.length).to eq(2)
+      expect(result.first.title).to eq("article#2")
       expect(result.last.title).to eq("article#1")
 
-      result = service.page(1).fetch_all
+      result = service.page(1, :per_page => 2).fetch_all
       expect(result.length).to eq(1)
       expect(result.first.title).to eq("article#0")
+
+      result = service.page(0, :per_page => 3).fetch_all
+      expect(result.length).to eq(3)
     end
   end
 end
