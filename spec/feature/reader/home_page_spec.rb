@@ -23,7 +23,8 @@ describe "Homepage" do
       "Roger Ebert",
       "Computer Chess",
       Categories::FILM.id,
-      "A good film\r\n\r\nAnother thing"
+      "A good film\r\n\r\nAnother thing",
+      "http://someimagehost.com/test.png"
     ), Time.at(0))
 
     article_service.publish(article_service.create(
@@ -36,6 +37,7 @@ describe "Homepage" do
     visit '/'
 
     expect(page).to have_content("Computer Chess")
+    expect(page).to have_css("img[src='http://someimagehost.com/test.png']")
     expect(page).to have_content("A good film")
 
     expect(page).to have_content("Dylan Farrow Is Already Too Old")
