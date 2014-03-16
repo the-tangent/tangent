@@ -15,15 +15,14 @@
 <script type="text/javascript">
   window.onload = function() {
     if (("standalone" in window.navigator) && window.navigator.standalone) {
-      var ele, remotes = false;
       document.addEventListener('click', function(event) {
-        ele = event.target;
+        var ele = event.target;
 
         while(ele.nodeName !== "A" && ele.nodeName !== "HTML") {
           ele = ele.parentNode;
         }
 
-        if ('href' in ele && ele.href.indexOf('http') !== -1 && (ele.href.indexOf(document.location.host) !== -1 || remotes)) {
+        if ('href' in ele && ele.href.indexOf('http') !== -1 && ele.href.indexOf(document.location.host) !== -1) {
           event.preventDefault();
           document.location.href = ele.href;
         }
