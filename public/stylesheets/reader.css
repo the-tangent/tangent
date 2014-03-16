@@ -97,6 +97,7 @@ body {
 }
 
 .tile .summary {
+  margin-top: 8px;
   text-align: justify;
   font-size: 14px;
 }

@@ -1,11 +1,12 @@
 module Widget
   class Tile
-    attr_reader :id, :title, :author
+    attr_reader :id, :title, :author, :image_url
 
     def initialize(article)
       @id = article.id
       @title = article.title
       @content = article.content || ""
+      @image_url = article.image_url
     end
 
     def summary
