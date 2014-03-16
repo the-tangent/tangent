@@ -8,10 +8,12 @@
               <%= article.title %>
             </a>
           </h4>
-          
+
           <% if article.image_url %>
             <div class="image">
+              <a href="/articles/<%= article.id %>">
                 <img class="img-responsive" src="<%= article.image_url %>">
+              </a>
             </div>
           <% end %>
 
