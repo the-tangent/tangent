@@ -10,16 +10,6 @@ class Reader < Base
     render_page :articles, :articles => tiles, :opts => { :home_active => true }
   end
 
-  get "/about/?" do
-    render_page :about
-  end
-
-  get "/people/?" do
-    flagged! do
-      render_page :people
-    end
-  end
-
   get "/categories/:id/?" do
     articles = service.fetch_all_from_category(params[:id])
     tiles = articles.map { |a| Widget::Tile.new(a) }
@@ -58,6 +48,16 @@ class Reader < Base
     end
   end
 
+  get "/about/?" do
+    render_page :about
+  end
+
+  get "/people/?" do
+    flagged! do
+      render_page :people
+    end
+  end
+
   private
 
   def render_page(template, locals = {})
@@ -67,6 +67,6 @@ class Reader < Base
   end
 
   def service
-    article_service.published.page(0)
+    article_service.published.page(0, :per_page => 9)
   end
 end

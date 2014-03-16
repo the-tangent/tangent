@@ -17,8 +17,8 @@ module Persistence
       self.class.new(@db, @options.merge(:published => false))
     end
 
-    def page(n)
-      self.class.new(@db, @options.merge(:page => n))
+    def page(n, per_page: 0)
+      self.class.new(@db, @options.merge(:page => n, :per_page => per_page))
     end
 
     def fetch(id)
@@ -83,7 +83,7 @@ module Persistence
       end
 
       if @options[:page]
-        dataset.limit(9).offset(@options[:page] * 9)
+        dataset.limit(@options[:per_page]).offset(@options[:page] * @options[:per_page])
       else
         dataset
       end
