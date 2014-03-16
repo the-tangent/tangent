@@ -14,6 +14,12 @@ class Reader < Base
     render_page :about
   end
 
+  get "/people/?" do
+    flagged! do
+      render_page :people
+    end
+  end
+
   get "/categories/:id/?" do
     articles = service.fetch_all_from_category(params[:id])
     tiles = articles.map { |a| Widget::Tile.new(a) }
@@ -27,7 +33,7 @@ class Reader < Base
     if article
       article_widget = Widget::Article.new(article)
       comments = Widget::Comments.new(ENV["RACK_ENV"])
-      
+
       render_page :articles_show, {
         :article => article_widget,
         :comments => comments,

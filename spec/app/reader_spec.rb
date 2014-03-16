@@ -20,4 +20,11 @@ describe Reader do
       expect(last_response).to be_ok
     end
   end
+
+  describe "GET /people" do
+    it "returns a success" do
+      get "/people"
+      expect(last_response).to be_ok
+    end
+  end
 end
