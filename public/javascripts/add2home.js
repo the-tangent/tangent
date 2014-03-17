@@ -334,11 +334,13 @@ var addToHome = (function (w) {
 	}
 
 	// Bootstrap!
-	init();
+  if (w.location.pathname == "/") {
+  	init();
 
-	return {
-		show: manualShow,
-		close: close,
-		reset: reset
-	};
+  	return {
+  		show: manualShow,
+  		close: close,
+  		reset: reset
+  	};
+  }
 })(window);
