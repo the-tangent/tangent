@@ -148,4 +148,8 @@ body {
   .pull-right {
     display: none;
   }
+
+  .search {
+    margin-bottom: 10px;
+  }
 }
