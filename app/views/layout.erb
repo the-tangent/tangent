@@ -5,6 +5,7 @@
   	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <script type="text/javascript" src="/javascripts/framework.js"/>
     <%= erb :ios_settings %>
 
     <link title="The Tangent" type="application/rss+xml" rel="alternate" href="http://<%= ENV["DOMAIN"] %>/rss.xml"></link>
@@ -42,6 +43,17 @@
           </div>
         <% end %>
         <div class="category search">
+          <% if opts[:query] %>
+            <script type="text/javascript">
+              window.onloads.push(function() {
+                var input = document.getElementById("search_query");
+                input.focus();
+                var val = input.value;
+                input.value = '';
+                input.value = val;
+              });
+            </script>
+          <% end %>
           <form action="/search" method="get">
             <input type="text" class="query-field" name="query" id="search_query" placeholder="Search" value="<%= opts[:query] %>">
             <button id="search_submit" type="submit">
