@@ -43,6 +43,12 @@ body {
 .category.active a {
   color: white;
 }
+
+#search_submit {
+  background-color: #d5d5d5;
+  border: none;
+}
+
 .date {
   margin-right: 15px;
 }
