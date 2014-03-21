@@ -3,5 +3,4 @@ class Base < Sinatra::Base
   set :public_folder, 'public'
 
   include Pharrell::Injectable
-  injected :article_service, Persistence::ArticleService
 end

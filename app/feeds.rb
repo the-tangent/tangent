@@ -1,7 +1,6 @@
 class Feeds < Base
   helpers Sinatra::Nedry
-
-  include Pharrell::Injectable
+  
   injected :article_service, Persistence::ArticleService
 
   get "/rss.xml" do

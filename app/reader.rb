@@ -2,6 +2,7 @@ class Reader < Base
   helpers Sinatra::Nedry
 
   injected :clock, System::Clock
+  injected :article_service, Persistence::ArticleService
 
   get "/" do
     articles = service.fetch_all
