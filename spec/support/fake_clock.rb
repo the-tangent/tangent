@@ -4,6 +4,6 @@ class FakeClock
   end
 
   def now
-    (@time || Time.at(0)).utc
+    (@time || Time.at(0).utc)
   end
 end
