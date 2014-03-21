@@ -97,7 +97,7 @@ describe "Homepage" do
 
       visit '/'
       fill_in "Search", :with => "chess"
-      click_on "Submit"
+      click_button "search_submit"
 
       expect(page).to have_content("Computer Chess")
       expect(page).to have_no_content("Other Category Article")
