@@ -44,7 +44,7 @@ class Reader < Base
 
       results = articles.select { |article| article.title.downcase.include?(query) }
       tiles = results.map { |result| Widget::Tile.new(result) }
-      render_page :articles, :articles => tiles
+      render_page :articles, :articles => tiles, :opts => { :query => params[:query] }
     end
   end
 

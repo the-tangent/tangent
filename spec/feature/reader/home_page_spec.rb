@@ -101,6 +101,7 @@ describe "Homepage" do
 
       expect(page).to have_content("Computer Chess")
       expect(page).to have_no_content("Other Category Article")
+      expect(page).to have_field("Search", :with => "chess")
     end
   end
 end
