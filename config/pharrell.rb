@@ -22,6 +22,7 @@ end
 Pharrell.config(:base) do |config|
   config.bind(System::Clock, System::Clock.new)
   config.bind(Persistence::ArticleService, Persistence::ArticleService)
+  config.bind(Persistence::ArticleSearchService, Persistence::ArticleSearchService)
 
   directory = FOG.directories.select { |d| d.key == "the-tangent" }.first
   config.bind(Persistence::ArticleImageService, Persistence::ArticleImageService.new(directory))

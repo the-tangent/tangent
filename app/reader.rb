@@ -3,6 +3,7 @@ class Reader < Base
 
   injected :clock, System::Clock
   injected :article_service, Persistence::ArticleService
+  injected :article_search_service, Persistence::ArticleSearchService
 
   get "/" do
     articles = service.fetch_all
@@ -39,14 +40,9 @@ class Reader < Base
   end
 
   get "/search/?" do
-    flagged! do
-      articles = service.fetch_all
-      query = params[:query].downcase
-
-      results = articles.select { |article| article.title.downcase.include?(query) }
-      tiles = results.map { |result| Widget::Tile.new(result) }
-      render_page :articles, :articles => tiles, :opts => { :query => params[:query] }
-    end
+    results = article_search_service.search(params[:query])
+    tiles = results.map { |result| Widget::Tile.new(result) }
+    render_page :articles, :articles => tiles, :opts => { :query => params[:query] }
   end
 
   get "/about/?" do
