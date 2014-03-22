@@ -18,7 +18,7 @@ class Reader < Base
   end
 
   get "/articles/:id/?" do
-    article = service.fetch(params[:id].to_i)
+    article = article_service.fetch(params[:id].to_i)
 
     if article
       article_widget = Widget::Article.new(article)
