@@ -17,7 +17,7 @@ module Widget
     end
 
     def date
-      @published.strftime("%e %B %Y")
+      @published ? @published.strftime("%e %B %Y") : ""
     end
 
     def published?
