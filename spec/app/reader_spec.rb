@@ -2,6 +2,9 @@ require "spec_helper"
 
 describe Reader do
   include Rack::Test::Methods
+  include Pharrell::Injectable
+
+  injected :article_service, Persistence::ArticleService
 
   def app
     Reader
@@ -11,6 +14,20 @@ describe Reader do
     it "shows a 404 if the article doesn't exist" do
       get "/articles/5"
       expect(last_response).to be_not_found
+    end
+
+    context "the article is unpublished" do
+      it "returns a 404" do
+        article_id = article_service.create(
+          "Roger Ebert",
+          "Computer Chess",
+          Categories::FILM.id,
+          "blah blah"
+        )
+
+        get "/articles/#{article_id}"
+        expect(last_response).to be_not_found
+      end
     end
   end
 
