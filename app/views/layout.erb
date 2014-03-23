@@ -42,6 +42,11 @@
               </h5>
           </div>
         <% end %>
+
+        <div class="pull-right date">
+          <h5><%= date.strftime("%e %B %Y") %><h5>
+        </div>
+
         <div class="category search">
           <% if opts[:query] %>
             <script type="text/javascript">
@@ -60,9 +65,6 @@
               <span class="glyphicon glyphicon-search"></span>
             </button>
           </form>
-        </div>
-        <div class="pull-right date">
-          <h5><%= date.strftime("%e %B %Y") %><h5>
         </div>
       </div>
 
