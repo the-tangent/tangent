@@ -1,0 +1,9 @@
+<% if articles.empty? %>
+  <div class="row tile-row">
+    <div class="col-md-12">
+      <h4>Couldn't find any articles with "<%= opts[:query] %>" :(</h4>
+    </div>
+  </div>
+<% else %>
+  <%= erb :articles, :locals => { :articles => articles } %>
+<% end %>

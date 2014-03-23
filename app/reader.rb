@@ -42,7 +42,7 @@ class Reader < Base
   get "/search/?" do
     results = article_search_service.search(params[:query])
     tiles = results.map { |result| Widget::Tile.new(result) }
-    render_page :articles, :articles => tiles, :opts => {
+    render_page :search, :articles => tiles, :opts => {
       :title => params[:query],
       :query => params[:query]
     }
