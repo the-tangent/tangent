@@ -44,6 +44,10 @@ body {
   color: white;
 }
 
+.category input {
+  font-size: 14px;
+}
+
 #search_submit {
   background-color: #d5d5d5;
   border: none;
