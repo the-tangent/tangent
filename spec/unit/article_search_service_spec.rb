@@ -44,5 +44,13 @@ describe Persistence::ArticleSearchService do
       expect(results.length).to eq(1)
       expect(results.first.title).to eq("Other Thing")
     end
+
+    it "returns all for a blank query" do
+      db[:articles].insert(:title => "some words")
+      db[:articles].insert(:title => "Other Thing")
+
+      results = service.search("")
+      expect(results.length).to eq(2)
+    end
   end
 end
