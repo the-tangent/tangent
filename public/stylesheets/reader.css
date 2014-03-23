@@ -53,6 +53,12 @@ body {
   border: none;
 }
 
+@media (max-width: 992px) {
+  #search_query {
+    width: 142px;
+  }
+}
+
 .date {
   margin-right: 15px;
 }
@@ -154,11 +160,13 @@ body {
   }
 }
 
-@media (max-width: 768px) {
-  .pull-right {
+@media (max-width: 992px) {
+  .date {
     display: none;
   }
+}
 
+@media (max-width: 768px) {
   .search {
     margin-bottom: 10px;
   }
