@@ -1,7 +1,6 @@
 class Editor < Base
   helpers Sinatra::Nedry
 
-  include Pharrell::Injectable
   injected :clock, System::Clock
   injected :article_service, Persistence::ArticleService
   injected :article_image_service, Persistence::ArticleImageService

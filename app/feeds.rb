@@ -1,6 +1,4 @@
-class Feeds < Base
-  helpers Sinatra::Nedry
-  
+class Feeds < Base  
   injected :article_service, Persistence::ArticleService
 
   get "/rss.xml" do
