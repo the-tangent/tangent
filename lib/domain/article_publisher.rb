@@ -22,6 +22,7 @@ module Domain
       [
         article.title && article.title.length > 0,
         article.author && article.author.length > 0,
+        article.summary && article.summary.length > 0,
         article.category_id && Categories::ALL.map(&:id).include?(article.category_id),
         article.content && article.content.length > 0
       ].all?
