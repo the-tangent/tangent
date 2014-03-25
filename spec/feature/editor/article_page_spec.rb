@@ -26,6 +26,7 @@ describe "The editor's article show page" do
 
     expect(page).to have_content("Computer Chess")
     expect(page).to have_content("Roger Ebert")
+    expect(page).to have_content("summary")
     expect(page.html).to include("<p>Heres a movie by nerds,</p>")
     expect(page.html).to include("<p>For nerds, and about nerds.</p>")
   end

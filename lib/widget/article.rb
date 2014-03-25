@@ -1,11 +1,12 @@
 module Widget
   class Article
-    attr_reader :id, :title, :author, :image_url
+    attr_reader :id, :title, :author, :summary, :image_url
 
     def initialize(article)
       @id = article.id
       @title = article.title
       @author = article.author
+      @summary = article.summary
       @content = article.content || ""
       @published = article.published
       @image_url = article.image_url
