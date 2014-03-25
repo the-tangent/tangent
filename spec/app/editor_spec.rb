@@ -24,7 +24,7 @@ describe Editor do
 
   describe "PUT /editor/articles" do
     it "uploads files under a scope" do
-      id = article_service.create("Roger Ebert", "Computers", Categories::FILM.id, "Some stuff")
+      id = article_service.create("Roger Ebert", "Computers", Categories::FILM.id, "Summary", "Some stuff")
 
       authorize "admin", "admin"
       put "/editor/articles/#{id}", :article => {
@@ -38,7 +38,7 @@ describe Editor do
 
   describe "POST /editor/articles/:id/publishing" do
     it "redirects to the article show page" do
-      article_service.create("Roger Ebert", "Computers", Categories::FILM.id, "Some stuff")
+      article_service.create("Roger Ebert", "Computers", Categories::FILM.id, "Summary", "Some stuff")
       id = article_service.fetch_all.first.id
 
       authorize "admin", "admin"
@@ -51,7 +51,7 @@ describe Editor do
 
   describe "DELETE /editor/articles/:id/publishing" do
     it "redirects to the article show page" do
-      article_service.create("", "", nil, "")
+      article_service.create("", "", nil, "", "")
       id = article_service.fetch_all.first.id
 
       authorize "admin", "admin"

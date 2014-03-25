@@ -23,6 +23,7 @@ describe "Homepage" do
       "Roger Ebert",
       "Computer Chess",
       Categories::FILM.id,
+      "A review",
       "A good film\r\n\r\nAnother thing",
       "http://someimagehost.com/test.png"
     ), Time.at(0))
@@ -31,6 +32,7 @@ describe "Homepage" do
       "Heather Long",
       "Dylan Farrow Is Already Too Old",
       Categories::FILM.id,
+      "A summary of an asshole",
       "Oh my god Woody Allen\r\n\r\nAnother thing"
     ), Time.at(0))
 
@@ -38,12 +40,9 @@ describe "Homepage" do
 
     expect(page).to have_content("Computer Chess")
     expect(page).to have_css("img[src='http://someimagehost.com/test.png']")
-    expect(page).to have_content("A good film")
 
     expect(page).to have_content("Dylan Farrow Is Already Too Old")
-    expect(page).to have_content("Oh my god Woody Allen")
-
-    expect(page).to have_no_content("Another thing")
+    expect(page).to have_content("A summary of an asshole")
   end
 
   it "links to the categories" do
@@ -62,6 +61,7 @@ describe "Homepage" do
         "Roger Ebert",
         "Computer Chess",
         Categories::FILM.id,
+        "summary",
         "some content"
       ), Time.at(0))
 
@@ -69,6 +69,7 @@ describe "Homepage" do
         "Heather Long",
         "Other Category Article",
         Categories::LIFE.id,
+        "summary",
         "some content"
       ), Time.at(0))
 

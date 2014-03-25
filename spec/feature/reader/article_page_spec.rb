@@ -15,6 +15,7 @@ describe "Article page" do
       "Roger Ebert",
       "Computer Chess",
       nil,
+      "summary",
       "The *best*:\n\nMovie.",
       "http://someimagehost.com/test.png"
     )

@@ -14,7 +14,7 @@ describe Persistence::ArticleService do
 
   describe "#fetch_all" do
     it "returns results in reverse date order" do
-      ids = service.create("", "", nil, ""), service.create("", "", nil, ""), service.create("", "", nil, "")
+      ids = service.create("", "", nil, "", ""), service.create("", "", nil, "", ""), service.create("", "", nil, "", "")
       service.publish(ids[1], Time.at(0))
       service.publish(ids[0], Time.at(2))
       service.publish(ids[2], Time.at(1))
@@ -25,7 +25,7 @@ describe Persistence::ArticleService do
 
   describe "#fetch_all_from_category" do
     it "returns results in reverse date order" do
-      ids = service.create("", "", "art", ""), service.create("", "", "art", ""), service.create("", "", "art", "")
+      ids = service.create("", "", "art", "", ""), service.create("", "", "art", "", ""), service.create("", "", "art", "", "")
       service.publish(ids[1], Time.at(0))
       service.publish(ids[0], Time.at(2))
       service.publish(ids[2], Time.at(1))
@@ -36,7 +36,7 @@ describe Persistence::ArticleService do
 
   describe "#publish" do
     it "publishes the article the passed id" do
-      ids = service.create("", "", nil, ""), service.create("", "", nil, "")
+      ids = service.create("", "", nil, "", ""), service.create("", "", nil, "", "")
 
       time = Time.at(0)
       service.publish(ids[0], time)
@@ -48,7 +48,7 @@ describe Persistence::ArticleService do
 
   describe "#unpublish" do
     it "unpublishes the article the passed id" do
-      ids = service.create("", "", nil, ""), service.create("", "", nil, "")
+      ids = service.create("", "", nil, "", ""), service.create("", "", nil, "", "")
 
       time = Time.at(0)
       service.publish(ids[0], time)
@@ -64,7 +64,7 @@ describe Persistence::ArticleService do
   describe "#page" do
     it "returns querys that yield the nth page of y articles" do
       3.times do |i|
-        id = service.create("", "article##{i}", nil, "")
+        id = service.create("", "article##{i}", nil, "", "")
         service.publish(id, Time.at(i))
       end
 

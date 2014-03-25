@@ -15,6 +15,7 @@ describe "Searching for articles" do
       "Roger Ebert",
       "Computer Chess",
       Categories::FILM.id,
+      "summary",
       "some content"
     ), Time.at(0))
 
@@ -22,6 +23,7 @@ describe "Searching for articles" do
       "Heather Long",
       "Other Category Article",
       Categories::LIFE.id,
+      "summary",
       "some content"
     ), Time.at(0))
 

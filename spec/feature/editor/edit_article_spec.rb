@@ -16,6 +16,7 @@ describe "The editor's article edit page" do
       "Roger Ebert",
       "Computer Chess",
       Categories::FILM.id,
+      "summary",
       "Here's a movie by nerds, for nerds, and about nerds."
     )
 
@@ -43,6 +44,7 @@ describe "The editor's article edit page" do
         "Roger Ebert",
         "Computer Chess",
         Categories::FILM.id,
+        "summary",
         "Here's a movie by nerds, for nerds, and about nerds."
       )
 

@@ -39,11 +39,12 @@ module Persistence
       dataset.reverse_order(:published).where(:category_id => id).all.map { |hash| Model.new(hash) }
     end
 
-    def create(author, title, category, content, image_url = nil)
+    def create(author, title, category, summary, content, image_url = nil)
       @db[:articles].insert(
         :author => author,
         :title => title,
         :category_id => category,
+        :summary => summary,
         :content => content,
         :image_url => image_url
       )
