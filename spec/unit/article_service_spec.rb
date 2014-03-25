@@ -34,6 +34,26 @@ describe Persistence::ArticleService do
     end
   end
 
+  describe "#update" do
+    it "updates the article" do
+      id = service.create("", "", "art", "", "")
+      service.update(id,
+        "Author",
+        "Title",
+        "film",
+        "Summary",
+        "Content"
+      )
+
+      record = service.fetch(id)
+      expect(record.author).to eq("Author")
+      expect(record.title).to eq("Title")
+      expect(record.category_id).to eq("film")
+      expect(record.summary).to eq("Summary")
+      expect(record.content).to eq("Content")
+    end
+  end
+
   describe "#publish" do
     it "publishes the article the passed id" do
       ids = service.create("", "", nil, "", ""), service.create("", "", nil, "", "")
