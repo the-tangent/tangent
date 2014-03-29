@@ -61,7 +61,7 @@
             </script>
           <% end %>
           <form action="/search" method="get">
-            <input type="text" class="query-field" name="query" id="search_query" placeholder="Search" value="<%= opts[:query] %>">
+            <input type="text" class="query-field" name="query" id="search_query" placeholder="Search" autocomplete="off" value="<%= opts[:query] %>">
             <button id="search_submit" type="submit">
               <span class="glyphicon glyphicon-search"></span>
             </button>
