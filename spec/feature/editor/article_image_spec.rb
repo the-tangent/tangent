@@ -46,4 +46,23 @@ describe "Uploading images for an article" do
 
     expect(page).to have_css("img[src$='test.png']")
   end
+
+  it "doesn't blow away old images on update if the image doesn't change" do
+    article_service.create(
+      "Roger Ebert",
+      "Computer Chess",
+      Categories::FILM.id,
+      "summary",
+      "Here's a movie by nerds, for nerds, and about nerds.",
+      "some_image.png"
+    )
+
+    visit "/editor"
+    click_on "Articles"
+    click_on "Computer Chess"
+    click_on "Edit"
+    click_on "Save"
+
+    expect(page).to have_css("img[src$='some_image.png']")
+  end
 end
