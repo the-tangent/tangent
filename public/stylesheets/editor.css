@@ -3,3 +3,7 @@
 body {
   padding-bottom: 24px;
 }
+
+.article .image {
+  margin-bottom: 10px;
+}
