@@ -16,6 +16,7 @@ describe "Homepage" do
       "Roger Ebert",
       "Computer Chess",
       Categories::FILM.id,
+      "summary",
       "some content"
     ), Time.at(0))
 
@@ -23,6 +24,7 @@ describe "Homepage" do
       "Heather Long",
       "Other Category Article",
       Categories::LIFE.id,
+      "summary",
       "some content"
     ), Time.at(0))
 

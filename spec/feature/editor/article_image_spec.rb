@@ -32,6 +32,7 @@ describe "Uploading images for an article" do
       "Roger Ebert",
       "Computer Chess",
       Categories::FILM.id,
+      "summary",
       "Here's a movie by nerds, for nerds, and about nerds."
     )
 

@@ -14,12 +14,12 @@ describe Feeds do
   describe "GET /rss.xml" do
     it "returns the last 20 published articles" do
       ids = 20.times.map do |i|
-        article_id = article_service.create("", "title#{i}", "film", "*content#{i}*")
+        article_id = article_service.create("", "title#{i}", "film", "summary", "*content#{i}*")
         article_service.publish(article_id, Time.at(i))
         article_id
       end
 
-      article_service.create("", "title20", "film", "content20")
+      article_service.create("", "title20", "film", "summary", "content20")
 
       get "/rss.xml"
 

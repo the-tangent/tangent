@@ -13,9 +13,9 @@ describe "The editor's article list page" do
   end
 
   it "lists the unpublished articles" do
-    article_service.create("Richard Riddick", "Surviving Crematoria", nil, nil)
-    article_service.create("John Rambo", "Killing Folk", nil, nil)
-    id = article_service.create("Jean Claude Van Damme", "Kicking People", nil, nil)
+    article_service.create("Richard Riddick", "Surviving Crematoria", nil, nil, nil)
+    article_service.create("John Rambo", "Killing Folk", nil, nil, nil)
+    id = article_service.create("Jean Claude Van Damme", "Kicking People", nil, nil, nil)
 
     article_service.publish(id, clock.now)
 
@@ -35,9 +35,9 @@ describe "The editor's article list page" do
 
   it "lists the published articles" do
     ids = []
-    ids << article_service.create("Richard Riddick", "Surviving Crematoria", nil, nil)
-    ids << article_service.create("John Rambo", "Killing Folk", nil, nil)
-    article_service.create("Jean Claude Van Damme", "Kicking People", nil, nil)
+    ids << article_service.create("Richard Riddick", "Surviving Crematoria", nil, nil, nil)
+    ids << article_service.create("John Rambo", "Killing Folk", nil, nil, nil)
+    article_service.create("Jean Claude Van Damme", "Kicking People", nil, nil, nil)
 
     ids.each { |id| article_service.publish(id, clock.now) }
 
@@ -64,6 +64,7 @@ describe "The editor's article list page" do
       fill_in "Title", :with => "Computer Chess"
       fill_in "Author", :with => "Roger Ebert"
       select "Film", :from => "Category"
+      fill_in "Summary", :with => "A review of Computer Chess"
       fill_in "Content", :with => "Here's a movie by nerds, for nerds, and about nerds."
       click_on "Save"
 

@@ -64,6 +64,7 @@ class Editor < Base
         article_params[:author],
         article_params[:title],
         article_params[:category],
+        article_params[:summary],
         article_params[:content]
       )
 
@@ -77,6 +78,7 @@ class Editor < Base
         article_params[:author],
         article_params[:title],
         article_params[:category],
+        article_params[:summary],
         article_params[:content],
         image_url
       )
@@ -99,6 +101,7 @@ class Editor < Base
         article_params[:author],
         article_params[:title],
         article_params[:category],
+        article_params[:summary],
         article_params[:content],
         image_url
       )

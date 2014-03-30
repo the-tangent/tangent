@@ -22,6 +22,7 @@ describe Reader do
           "Roger Ebert",
           "Computer Chess",
           Categories::FILM.id,
+          "summary",
           "blah blah"
         )
 
