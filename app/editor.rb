@@ -94,7 +94,7 @@ class Editor < Base
       image_url = if article_params[:image]
         article_image_service.upload(params[:id], article_params[:image])
       else
-        nil
+        article_service.fetch(params[:id]).image_url
       end
 
       article_service.update(params[:id],
