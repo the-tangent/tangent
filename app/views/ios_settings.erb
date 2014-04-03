@@ -24,9 +24,16 @@
 
         if ('href' in ele && ele.href.indexOf('http') !== -1 && ele.href.indexOf(document.location.host) !== -1) {
           event.preventDefault();
-          document.location.href = ele.href;
+          localStorage.location = ele.pathname;
+          document.location.pathname = ele.pathname;
         }
       }, false);
+
+      if (document.location.pathname == "/" && localStorage.location != null && localStorage.location != "/") {
+        setTimeout(function() {
+          document.location.pathname = localStorage.location;
+        }, 0);
+      }
     }
   });
 </script>
