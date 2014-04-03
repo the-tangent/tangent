@@ -1,7 +1,7 @@
 tangent
 =======
 
-[![Build Status](https://travis-ci.org/the-tangent/tangent.png?branch=master)](https://travis-ci.org/seadowg/tangent)
+[![Build Status](https://travis-ci.org/the-tangent/tangent.png?branch=master)](https://travis-ci.org/the-tangent/tangent)
 
 We’re going to start a newspaper. Online. Why? Because we’re bored of newspapers but we’re not bored of news.
 
